@@ -22,8 +22,8 @@ const EditAccount = ({ data }) => {
    const [alert, setAlert] = useState('')
 
    useEffect(() => {
-      setName(data.nickname)
-      setType(data.type)
+      setName(data.nickname || '')
+      setType(data.type || 'Cash')
    }, [data])
 
    const handleSubmit = (e) => {
