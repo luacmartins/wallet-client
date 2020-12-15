@@ -1,0 +1,32 @@
+@tailwind base;
+
+/* Write your own custom base styles here */
+
+/* Start purging... */
+@tailwind components;
+/* Stop purging. */
+
+/* Write you own custom component styles here */
+@responsive {
+   .chart-h-80 {
+     height: 20rem !important;
+   }
+   .chart-h-96 {
+      height: 24rem !important;
+    }
+
+    .chart-h-112 {
+      height: 28rem !important;
+    }
+ }
+
+input[type="date"]::-webkit-inner-spin-button,
+input[type="date"]::-webkit-calendar-picker-indicator {
+    display: none;
+    -webkit-appearance: none;
+}
+/* Start purging... */
+@tailwind utilities;
+/* Stop purging. */
+
+/* Your own custom utilities */
