@@ -4,7 +4,7 @@ import AddCircle from '../icons/AddCircle'
 import fetcher from '../../utils/fetcher'
 import PlaidLinkAccount from '../PlaidLinkAccount'
 
-const AddAccount = ({ autoInit = false }) => {
+const AddAccount = () => {
    const [token, setToken] = useState(null)
 
    const generateToken = async () => {
@@ -12,11 +12,6 @@ const AddAccount = ({ autoInit = false }) => {
          .then(res => setToken(res.data.link_token))
          .catch(e => console.log(e))
    }
-
-   useEffect(() => {
-      if (autoInit) generateToken()
-   }, [autoInit])
-
 
    return (
       <>
