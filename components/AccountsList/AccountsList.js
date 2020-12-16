@@ -11,7 +11,7 @@ const AccountsList = ({ data }) => {
    const [active, setActive] = useState('')
 
    useEffect(() => {
-      const initialState = data && data[Object.keys(data)[0]][0] || ''
+      const initialState = Object.keys(data).length > 0 && data[Object.keys(data)[0]][0] || ''
       setAccount(initialState)
       setActive(initialState._id)
    }, [data])
@@ -25,7 +25,7 @@ const AccountsList = ({ data }) => {
 
    if (data.length === 0) return (
       <Card>
-         <AddAccount autoInit={true} />
+         <AddAccount />
       </Card>
    )
 

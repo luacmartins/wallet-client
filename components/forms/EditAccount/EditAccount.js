@@ -36,9 +36,9 @@ const EditAccount = ({ data }) => {
       setIsNameLoading(false)
    }
 
-   const handleDelete = (e) => {
+   const handleDelete = (e, id) => {
       e.preventDefault()
-      console.log('delete')
+      fetcher.delete(`/api/accounts/${id}`)
    }
 
    return (
@@ -60,12 +60,12 @@ const EditAccount = ({ data }) => {
                <Select data={types} value={type} setValue={setType} error={typeError} setError={setTypeError} label={'floating'} labelText={'Account type'} className="mt-6" />
             </div>
 
-            <div className="flex flex-col items-center mt-8">
+            {/* <div className="flex flex-col items-center mt-8">
                <a className="text-theme-yellow-500 underline" href="/">Edit account credentials</a>
-               <span className="font-thin text-xs">All accounts from this institution will be affected.</span>
-            </div>
+            </div> */}
             <div className="mt-10 flex flex-col items-center">
-               <button onClick={handleDelete} className="text-red-600 underline font-semibold hover:text-red-700">Delete account</button>
+               <button onClick={(e) => handleDelete(e, data._id)} className="text-red-600 underline font-semibold hover:text-red-700">Delete account</button>
+               <span className="font-thin text-xs">All accounts from this institution will be affected.</span>
                <Button
                   className="block mt-10"
                   onClick={(e) => handleSubmit(e, data._id)}
