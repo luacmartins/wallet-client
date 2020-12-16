@@ -44,7 +44,7 @@ const EditAccount = ({ data }) => {
             <span className="text-lg text-center">{data.nickname}</span>
             <span className="text-sm font-normal">{data.name}</span>
             <span className="mt-4 text-3xl">
-               <NumberFormat value={data.balance / 100} displayType={'text'} thousandSeparator={true} prefix={'$'} decimalScale={2} fixedDecimalScale={true} />
+               <NumberFormat value={data.balance} displayType={'text'} thousandSeparator={true} prefix={'$'} decimalScale={2} fixedDecimalScale={true} />
             </span>
          </div>
          <form className="w-72 md:w-80 mx-auto mt-8">

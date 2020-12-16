@@ -41,7 +41,7 @@ const AccountsList = ({ data }) => {
                            <div className="flex items-center h-12 px-6">
                               <span className="flex-1 whitespace-no-wrap truncate mr-4">{account.nickname}</span>
                               <span>
-                                 <NumberFormat value={account.balance / 100} displayType={'text'} thousandSeparator={true} prefix={'$'} decimalScale={2} fixedDecimalScale={true} />
+                                 <NumberFormat value={account.balance} displayType={'text'} thousandSeparator={true} prefix={'$'} decimalScale={2} fixedDecimalScale={true} />
                               </span>
                            </div>
                         </Card>
