@@ -1,5 +1,6 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Head from 'next/head'
+import fetcher from '../utils/fetcher'
 import Layout from '../components/shared/Layout'
 import NavBar from '../components/desktop/NavBar'
 import MobileHeader from '../components/mobile/Header'
@@ -15,10 +16,18 @@ import AddTransaction from '../components/desktop/AddTransaction'
 import AddCircle from '../components/icons/AddCircle'
 
 //import fake data
-import data from '../data/transactionsData'
+// import data from '../data/transactionsData'
 
 export default function AccountsPage() {
    const [isVisible, setIsVisible] = useState(false)
+   const [data, setData] = useState({ 'pending': [], 'posted': [] })
+
+   useEffect(() => {
+      fetcher.get('/api/transactions')
+         .then(res => setData(res.data))
+         .catch(e => console.log(e))
+   })
+
    const handleAdd = () => {
       console.log('adding new transaction')
    }

@@ -21,12 +21,12 @@ const Transaction = ({ item, className, disabled, ...props }) => {
                <span className="md:text-lg">{moment(date, 'YYYYMMDD').format('D')}</span>
                <span className="text-xs font-normal md:text-base">{moment(date, 'YYYYMMDD').format('MMM')}</span>
             </div>
-            <div className="flex flex-col flex-1 text-sm md:text-lg md:ml-6 md:leading-tight">
-               <span>{description}</span>
+            <div className="flex flex-col flex-1 w-32 md:w-48 text-sm md:text-lg mr-4 md:mx-4 md:leading-tight">
+               <span className="capitalize truncate">{description.toLowerCase()}</span>
                <span className="font-normal text-theme-gray-700 text-xs md:text-sm">{item.category}</span>
             </div>
             <NumberFormat
-               value={item.amount / 100}
+               value={item.amount}
                displayType={'text'}
                thousandSeparator={true}
                prefix={'$'}
