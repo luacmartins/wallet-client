@@ -26,7 +26,7 @@ export default function AccountsPage() {
       fetcher.get('/api/transactions')
          .then(res => setData(res.data))
          .catch(e => console.log(e))
-   })
+   }, [])
 
    const handleAdd = () => {
       console.log('adding new transaction')
@@ -42,7 +42,7 @@ export default function AccountsPage() {
             <NavBar />
             <MobileHeader
                title={'Transactions'}
-               right={<AddTransactionModal onClick={handleAdd} />}
+               // right={<AddTransactionModal onClick={handleAdd} />}
                left={<FiltersModal />}
             />
             <main className="flex-1 mt-4 mb-12">
@@ -59,12 +59,12 @@ export default function AccountsPage() {
                      <div className="w-full md:flex-1">
                         <div className="hidden md:flex md:justify-between md:items-center md:mb-4">
                            <ResetFilters />
-                           <button onClick={() => setIsVisible(!isVisible)} className="flex relative items-center gap-x-1 font-semibold hover:text-theme-gray-800">
+                           {/* <button onClick={() => setIsVisible(!isVisible)} className="flex relative items-center gap-x-1 font-semibold hover:text-theme-gray-800">
                               <AddCircle />
                               <span>Add transaction</span>
-                           </button>
+                           </button> */}
                         </div>
-                        {isVisible && <AddTransaction close={() => setIsVisible(!isVisible)} />}
+                        {/* {isVisible && <AddTransaction close={() => setIsVisible(!isVisible)} />} */}
                         {data && <TransactionsList data={data} handleAdd={handleAdd} />}
                      </div>
                   </div>

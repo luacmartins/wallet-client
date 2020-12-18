@@ -1,12 +1,8 @@
 import { useRef } from 'react'
 import NumberFormat from 'react-number-format'
 
-const Amount = ({ value, labelText, label, setValue, error, setError, background, className, ...props }) => {
+const Amount = ({ value, labelText, label, setValue, error, setError, display = true, background, className, ...props }) => {
    const inputEl = useRef(null)
-
-   const handleClick = () => {
-      inputEl.current.focus()
-   }
 
    const handleOnChange = (e) => {
       setValue(e.target.value)
@@ -25,7 +21,7 @@ const Amount = ({ value, labelText, label, setValue, error, setError, background
 
    return (
       <>
-         <div onClick={handleClick}
+         <div
             className={
                `flex flex-col relative border rounded h-12 bg-white px-3 w-full font-semibold 
                ${label === 'inside' && 'h-16 py-2'}
@@ -45,9 +41,12 @@ const Amount = ({ value, labelText, label, setValue, error, setError, background
                {labelText}
             </label>
             <NumberFormat
+               ref={inputEl}
                name="amount"
                value={value}
-               displayType={'input'}
+               onChange={handleOnChange}
+               onBlur={handleOnBlur}
+               displayType={display && 'input'}
                thousandSeparator={true}
                decimalScale={2}
                fixedDecimalScale={2}
