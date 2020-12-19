@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react'
 import moment from 'moment'
 import NumberFormat from 'react-number-format'
+import fetcher from '../../utils/fetcher'
 import Modal from '../mobile/Modal'
 import EditTransaction from '../mobile/EditTransaction'
 import EditTransactionDesktop from '../desktop/EditTransaction'
@@ -30,6 +31,11 @@ const Transaction = ({ item, className, disabled, categories, ...props }) => {
       setIsVisible(false)
    }
 
+   const handleSubmit = (id, payload) => {
+      fetcher.patch(`/api/transactions/${id}`, payload)
+      setIsVisible(false)
+   }
+
    return (
       <div ref={wrapperEl}>
          <div onClick={() => setIsVisible(!isVisible)} className={`flex py-2 items-center md:px-2 md:py-4 ${className || ''} ${!disabled && 'cursor-pointer md:py-4 md:px-6'}`} {...props}>
@@ -51,14 +57,14 @@ const Transaction = ({ item, className, disabled, categories, ...props }) => {
                className="md:text-lg"
             />
          </div>
-         {isVisible && !disabled && <EditTransactionDesktop data={item} categories={categories} />}
+         {isVisible && !disabled && <EditTransactionDesktop data={item} categories={categories} submit={handleSubmit} />}
          {!disabled && <Modal
             isVisible={isVisible}
             setIsVisible={handleClose}
             title={'Transactions'}
          >
             <div className="mx-4 mt-10 mb-12">
-               <EditTransaction data={item} categories={categories} />
+               <EditTransaction data={item} categories={categories} submit={handleSubmit} />
             </div>
          </Modal>}
       </div>

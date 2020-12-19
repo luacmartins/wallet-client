@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import fetcher from '../../../utils/fetcher'
 import moment from 'moment'
 import Date from '../../inputs/Date'
 import Text from '../../inputs/Text'
@@ -7,7 +6,7 @@ import Select from '../../inputs/Select'
 import Button from '../../shared/Button'
 import Amount from '../../inputs/Amount'
 
-const EditTransaction = ({ data, categories }) => {
+const EditTransaction = ({ data, categories, submit }) => {
    // const date = data.date.user || data.date.original
    const originalDate = moment(data.date.original).format('MMM, D YYYY')
    // const description = data.description.user || data.description.original
@@ -23,6 +22,8 @@ const EditTransaction = ({ data, categories }) => {
    const [categoryError, setCategoryError] = useState('')
 
    const handleSubmit = () => {
+      let editedAmount
+      typeof amount === 'string' ? editedAmount = Number(amount.replace('$', '')) : editedAmount = amount
       const payload = {
          date: {
             original: data.date.original,
@@ -32,10 +33,10 @@ const EditTransaction = ({ data, categories }) => {
             original: data.description.original,
             user: description
          },
-         amount: Number(amount.replace('$', '')),
+         amount: editedAmount,
          category
       }
-      fetcher.patch(`/api/transactions/${data._id}`, payload)
+      submit(data._id, payload)
    }
 
    return (

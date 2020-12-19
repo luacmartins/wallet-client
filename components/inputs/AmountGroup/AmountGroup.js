@@ -13,7 +13,7 @@ const AmountGroup = () => {
                   placeholder={'$0.00'}
                   thousandSeparator={true}
                   decimalScale={2}
-                  fixedDecimalScale={2}
+                  fixedDecimalScale={true}
                   prefix={'$'}
                   className="placeholder-theme-gray-900"
                />
@@ -26,7 +26,7 @@ const AmountGroup = () => {
                   thousandSeparator={true}
                   decimalScale={2}
                   placeholder={'$0.00'}
-                  fixedDecimalScale={2}
+                  fixedDecimalScale={true}
                   prefix={'$'}
                   className="placeholder-theme-gray-900"
                />
