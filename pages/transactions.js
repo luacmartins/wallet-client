@@ -17,7 +17,7 @@ import AddTransactionModal from '../components/mobile/AddTransactionModal'
 import AddTransaction from '../components/desktop/AddTransaction'
 import AddCircle from '../components/icons/AddCircle'
 
-export default function AccountsPage() {
+export default function TransactionsPage() {
    const [isVisible, setIsVisible] = useState(false)
    const [data, setData] = useState({ 'pending': [], 'posted': [] })
    const [filters, setFilters] = useState({})
@@ -52,12 +52,12 @@ export default function AccountsPage() {
             <main className="flex-1 mt-4 mb-12">
                <div className="md:w-180 lg:w-240 md:mx-auto md:mt-8">
                   <div className="mx-4 mb-4 md:hidden">
-                     <Search />
+                     <Search value={filters} setValue={setFilters} />
                      {!isEmpty && <ResetFilters setValue={setFilters} />}
                   </div>
                   <div className="flex md:gap-x-10 lg:gap-x-12">
                      <div className="hidden md:flex md:flex-col gap-y-6 md:w-64">
-                        <Search />
+                        <Search value={filters} setValue={setFilters} />
                         <Filters value={filters} setValue={setFilters} />
                      </div>
                      <div className="w-full md:flex-1">
