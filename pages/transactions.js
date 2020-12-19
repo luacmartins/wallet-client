@@ -20,7 +20,7 @@ import AddCircle from '../components/icons/AddCircle'
 export default function AccountsPage() {
    const [isVisible, setIsVisible] = useState(false)
    const [data, setData] = useState({ 'pending': [], 'posted': [] })
-   const [filters, setFilters] = useState([])
+   const [filters, setFilters] = useState({})
 
    useEffect(() => {
       const query = qs.stringify(filters, { indices: false, arrayFormat: 'comma', addQueryPrefix: true })
@@ -33,6 +33,8 @@ export default function AccountsPage() {
    const handleAdd = () => {
       console.log('adding new transaction')
    }
+
+   const isEmpty = Object.keys(filters).length === 0
 
    return (
       <>
@@ -51,7 +53,7 @@ export default function AccountsPage() {
                <div className="md:w-180 lg:w-240 md:mx-auto md:mt-8">
                   <div className="mx-4 mb-4 md:hidden">
                      <Search />
-                     {filters && <ResetFilters setValue={setFilters} />}
+                     {!isEmpty && <ResetFilters setValue={setFilters} />}
                   </div>
                   <div className="flex md:gap-x-10 lg:gap-x-12">
                      <div className="hidden md:flex md:flex-col gap-y-6 md:w-64">
@@ -60,7 +62,7 @@ export default function AccountsPage() {
                      </div>
                      <div className="w-full md:flex-1">
                         <div className="hidden md:flex md:justify-between md:items-center">
-                           {filters && <ResetFilters setValue={setFilters} />}
+                           {!isEmpty && <ResetFilters setValue={setFilters} />}
                            {/* <button onClick={() => setIsVisible(!isVisible)} className="flex relative items-center gap-x-1 font-semibold hover:text-theme-gray-800">
                               <AddCircle />
                               <span>Add transaction</span>
