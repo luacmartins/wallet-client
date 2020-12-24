@@ -12,6 +12,7 @@ import Search from '../components/inputs/Search'
 import ResetFilters from '../components/ResetFilters'
 import FiltersModal from '../components/mobile/FilterModal'
 import Filters from '../components/FiltersList'
+import Pagination from '../components/Pagination'
 
 import AddTransactionModal from '../components/mobile/AddTransactionModal'
 import AddTransaction from '../components/desktop/AddTransaction'
@@ -20,15 +21,20 @@ import AddCircle from '../components/icons/AddCircle'
 export default function TransactionsPage() {
    const [isVisible, setIsVisible] = useState(false)
    const [data, setData] = useState({ 'pending': [], 'posted': [] })
+   const [totalPages, setTotalPages] = useState('')
+   const [page, setPage] = useState(1)
    const [filters, setFilters] = useState({})
 
    useEffect(() => {
-      const query = qs.stringify(filters, { indices: false, arrayFormat: 'comma', addQueryPrefix: true })
+      const query = qs.stringify({ ...filters, page }, { indices: false, arrayFormat: 'comma', addQueryPrefix: true })
 
       fetcher.get(`/api/transactions/${query}`)
-         .then(res => setData(res.data))
+         .then(res => {
+            setTotalPages(parseInt(res.headers['x-total-pages']))
+            setData(res.data)
+         })
          .catch(e => console.log(e))
-   }, [filters])
+   }, [filters, page])
 
    const handleAdd = () => {
       console.log('adding new transaction')
@@ -70,6 +76,7 @@ export default function TransactionsPage() {
                         </div>
                         {/* {isVisible && <AddTransaction close={() => setIsVisible(!isVisible)} />} */}
                         {data && <TransactionsList data={data} handleAdd={handleAdd} />}
+                        {totalPages > 1 && <Pagination value={page} setValue={setPage} totalPages={totalPages} />}
                      </div>
                   </div>
                </div>

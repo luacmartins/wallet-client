@@ -46,6 +46,16 @@ const FiltersList = ({ value, setValue }) => {
 
    return (
       <div className="w-full">
+         {/* date picker */}
+         <div className="mb-6">
+            <DatePicker value={value} setValue={setValue} />
+         </div>
+
+         {/* amount picker */}
+         <div className="mb-6">
+            <AmountPicker value={value} setValue={setValue} />
+         </div>
+
          {list.map((item, i) => (
             <div key={item.name}>
                <header className="text-sm">{item.name}</header>
@@ -71,14 +81,6 @@ const FiltersList = ({ value, setValue }) => {
                </Card>
             </div>
          ))}
-
-         {/* date picker */}
-         <div className="mb-6">
-            <DatePicker />
-         </div>
-
-         {/* amount picker */}
-         <AmountPicker />
       </div>
    );
 }
