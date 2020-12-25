@@ -2,21 +2,17 @@ const Pagination = ({ value, setValue, totalPages }) => {
    const neighbor = 1
    const display = 4
 
-   let start, end, hasLeftSpill, hasRightSpill
+   let start, end, hasLeftSpill = false, hasRightSpill = false
 
    if (totalPages <= display + 1) {
-      hasLeftSpill = false
-      hasRightSpill = false
       start = 1
       end = totalPages - 1
    } else if (value < display) {
-      hasLeftSpill = false
       hasRightSpill = true
       start = 1
       end = start + display - 1
    } else if (value > totalPages - display + 1) {
       hasLeftSpill = true
-      hasRightSpill = false
       start = totalPages - display
       end = totalPages - 1
    } else {
