@@ -16,7 +16,7 @@ import Pagination from '../components/Pagination'
 import Main from '../components/shared/Main'
 
 export default function TransactionsPage() {
-   const [data, setData] = useState({ 'pending': [], 'posted': [] })
+   const [data, setData] = useState()
    const [totalPages, setTotalPages] = useState('')
    const [page, setPage] = useState(1)
    const [filters, setFilters] = useState({})
@@ -48,10 +48,9 @@ export default function TransactionsPage() {
             <NavBar />
             <MobileHeader
                title={'Transactions'}
-               // right={<AddTransactionModal onClick={handleAdd} />}
                left={<FiltersModal value={filters} setValue={setFilters} />}
             />
-            <Main data={data.posted} message={'You have no transactions. Add more accounts to see your transactions.'}>
+            <Main data={data} message={'You have no transactions. Add more accounts to see your transactions.'}>
                <div className="md:w-180 lg:w-240 md:mx-auto md:mt-8">
                   <div className="mx-4 mb-4 md:hidden">
                      <Search value={filters} setValue={setFilters} />

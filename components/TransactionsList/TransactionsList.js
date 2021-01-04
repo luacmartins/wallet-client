@@ -27,13 +27,14 @@ const TransactionsList = ({ data }) => {
 
          {/* posted transations */}
          <header className="text-xl">Past</header>
-         <Card className="px-4 md:px-0 py-2 md:py-0 mt-2">
+         {data.posted.length === 0 && <div className="font-normal opacity-50">No past transactions.</div>}
+         {data.posted.length > 0 && <Card className="px-4 md:px-0 py-2 md:py-0 mt-2">
             <div className="divide-theme-gray-600 divide-y">
                {data.posted.map((item, i) => (
                   <Transaction key={i} item={item} categories={categories} />
                ))}
             </div>
-         </Card>
+         </Card>}
       </div>
    );
 }
