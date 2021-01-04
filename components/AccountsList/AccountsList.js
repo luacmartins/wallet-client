@@ -4,6 +4,7 @@ import Card from '../shared/Card'
 import Modal from '../mobile/Modal'
 import EditAccount from '../forms/EditAccount'
 import AddAccount from '../AddAccount'
+import Warning from '../icons/Warning'
 
 const AccountsList = ({ data }) => {
    const [isVisible, setIsVisible] = useState(false)
@@ -43,6 +44,7 @@ const AccountsList = ({ data }) => {
                               <span>
                                  <NumberFormat value={account.balance} displayType={'text'} thousandSeparator={true} prefix={'$'} decimalScale={2} fixedDecimalScale={true} />
                               </span>
+                              {account.needsUpdate && <Warning className="text-red-600 ml-2" />}
                            </div>
                         </Card>
                      ))}
