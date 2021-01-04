@@ -17,7 +17,7 @@ const SpendTooltip = ({ payload, total }) => {
                displayType={'text'}
                thousandSeparator={true}
                prefix={'$'}
-               fixedDecimalScale={2}
+               fixedDecimalScale={true}
                decimalScale={2}
             />
          </span>

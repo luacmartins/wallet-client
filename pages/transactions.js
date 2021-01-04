@@ -13,13 +13,9 @@ import ResetFilters from '../components/ResetFilters'
 import FiltersModal from '../components/mobile/FilterModal'
 import Filters from '../components/FiltersList'
 import Pagination from '../components/Pagination'
-
-import AddTransactionModal from '../components/mobile/AddTransactionModal'
-import AddTransaction from '../components/desktop/AddTransaction'
-import AddCircle from '../components/icons/AddCircle'
+import Main from '../components/shared/Main'
 
 export default function TransactionsPage() {
-   const [isVisible, setIsVisible] = useState(false)
    const [data, setData] = useState({ 'pending': [], 'posted': [] })
    const [totalPages, setTotalPages] = useState('')
    const [page, setPage] = useState(1)
@@ -55,7 +51,7 @@ export default function TransactionsPage() {
                // right={<AddTransactionModal onClick={handleAdd} />}
                left={<FiltersModal value={filters} setValue={setFilters} />}
             />
-            <main className="flex-1 mt-4 mb-12">
+            <Main data={data.posted} message={'You have no transactions. Add more accounts to see your transactions.'}>
                <div className="md:w-180 lg:w-240 md:mx-auto md:mt-8">
                   <div className="mx-4 mb-4 md:hidden">
                      <Search value={filters} setValue={setFilters} />
@@ -69,18 +65,13 @@ export default function TransactionsPage() {
                      <div className="w-full md:flex-1">
                         <div className="hidden md:flex md:justify-between md:items-center">
                            {!isEmpty && <ResetFilters setValue={setFilters} />}
-                           {/* <button onClick={() => setIsVisible(!isVisible)} className="flex relative items-center gap-x-1 font-semibold hover:text-theme-gray-800">
-                              <AddCircle />
-                              <span>Add transaction</span>
-                           </button> */}
                         </div>
-                        {/* {isVisible && <AddTransaction close={() => setIsVisible(!isVisible)} />} */}
                         {data && <TransactionsList data={data} handleAdd={handleAdd} />}
                         {totalPages > 1 && <Pagination value={page} setValue={setPage} totalPages={totalPages} />}
                      </div>
                   </div>
                </div>
-            </main>
+            </Main>
             <Footer />
             <MobileNavBar />
          </Layout>

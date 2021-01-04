@@ -17,6 +17,7 @@ import Footer from '../components/desktop/Footer'
 import TransactionsList from '../components/TransactionsList'
 import NetWorthChart from '../components/charts/NetWorth'
 import Timeframe from '../components/charts/Timeframe'
+import Main from '../components/shared/Main'
 
 
 // import fake data
@@ -49,21 +50,24 @@ export default function DashboardPage() {
             <MobileHeader
                right={<Profile />}
             />
-            <main className="flex-1 mt-4 mb-12 md:mt-12">
-               <NetWorthIntro data={data.networth.summary} />
-               <div style={{ height: `${height}px` }} className="w-full">
-                  <NetWorthChart data={data.networth.series} />
-               </div>
-               <Timeframe timeframe={data.networth.timeframe} setData={() => { }} />
-               <div className="mt-12 md:flex md:w-180 lg:w-240 md:mx-auto md:mt-16">
-                  <div className="hidden md:flex md:flex-1">
-                     <TransactionsList data={data.transactions} />
+            <Main data={data} message={'Your summary will be displayed here once we fetch data for your accounts.'}>
+               {data && Object.keys(data).length > 0 && <>
+                  <NetWorthIntro data={data.networth.summary} />
+                  <div style={{ height: `${height}px` }} className="w-full">
+                     <NetWorthChart data={data.networth.series} />
                   </div>
-                  <div className="md:w-80 lg:w-96 md:ml-8">
-                     <AccountsOverview data={data.accounts} />
+                  <Timeframe timeframe={data.networth.timeframe} setData={() => { }} />
+                  <div className="mt-12 md:flex md:w-180 lg:w-240 md:mx-auto md:mt-16">
+                     <div className="hidden md:flex md:flex-1">
+                        <TransactionsList data={data.transactions} />
+                     </div>
+                     <div className="md:w-80 lg:w-96 md:ml-8">
+                        <AccountsOverview data={data.accounts} />
+                     </div>
                   </div>
-               </div>
-            </main>
+               </>
+               }
+            </Main>
             <Footer />
             <MobileNavBar />
          </Layout>

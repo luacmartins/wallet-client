@@ -8,10 +8,10 @@ import MobileNavBar from '../components/mobile/NavBar'
 import AccountsList from '../components/AccountsList'
 import Footer from '../components/desktop/Footer'
 import AddAccount from '../components/AddAccount'
+import Main from '../components/shared/Main'
 
 export default function AccountsPage() {
    const [data, setData] = useState('')
-
    useEffect(() => {
       fetcher.get('/api/accounts')
          .then(res => {
@@ -32,9 +32,9 @@ export default function AccountsPage() {
                title={'Accounts'}
                right={<AddAccount />}
             />
-            <main className="flex-1 mt-4">
+            <Main data={data} message={'You have no accounts linked to your profile. Add an account to start seeing your data.'}>
                <AccountsList data={data} />
-            </main>
+            </Main>
             <Footer />
             <MobileNavBar />
          </Layout>
