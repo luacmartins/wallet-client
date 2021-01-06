@@ -1,6 +1,6 @@
 import NumberFormat from 'react-number-format'
 
-const MonthlySpendIntro = ({ data }) => {
+const MonthlySpendIntro = ({ data, period }) => {
    return (
       <div className="w-screen md:w-full flex flex-col justify-center items-center text-theme-gray-700 md:text-lg lg:text-xl">
          <span className="text-sm md:text-lg lg:text-xl">You've spent</span>
@@ -15,7 +15,11 @@ const MonthlySpendIntro = ({ data }) => {
             />
          </span>
          <div>
-            <span>so far this month.</span>
+            {period === 'MTD' && <span>so far this month.</span>}
+            {period === '1M' && <span>in the past month.</span>}
+            {period === '6M' && <span>in the past six months.</span>}
+            {period === '1Y' && <span>in the past year.</span>}
+            {period === 'YTD' && <span>so far this year.</span>}
          </div>
          <div>
             <span>That's </span>

@@ -32,7 +32,7 @@ const OvertimeSpending = ({ colors, data }) => {
                <Tooltip
                   cursor={{ stroke: '#909090', strokeWidth: 2, strokeDasharray: '6' }}
                   allowEscapeViewBox={{ x: false, y: true }}
-                  position={{ y: -105 }}
+                  position={{ y: -120 }}
                   content={<OvertimeTooltip />}
                />
                {categories.map((item, i) => (
