@@ -20,7 +20,7 @@ const YTicks = ({ x, y, payload }) => {
                   :
                   Math.abs(payload.value) > 1000 ? `$${round(payload.value / 1000, 1)}k`
                      :
-                     `$${payload.value}`
+                     `$${Math.round(payload.value)}`
             }
          </div>
       </foreignObject>
