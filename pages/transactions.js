@@ -50,7 +50,7 @@ export default function TransactionsPage() {
                title={'Transactions'}
                left={<FiltersModal value={filters} setValue={setFilters} />}
             />
-            <Main data={data} message={'You have no transactions. Add more accounts to see your transactions.'}>
+            <Main data={data} empty={(data && data.posted.length === 0) || data && data.pending === 0} message={'You have no transactions. Add more accounts to see your transactions.'}>
                <div className="md:w-180 lg:w-240 md:mx-auto md:mt-8">
                   <div className="mx-4 mb-4 md:hidden">
                      <Search value={filters} setValue={setFilters} />

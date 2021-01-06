@@ -15,8 +15,8 @@ const Tooltip = ({ coordinate: { x, y }, payload }) => {
       let xPos
       const $width = window.innerWidth
 
-      if (x < 72) xPos = 52
-      else if (x > $width - 72) xPos = $width - 52
+      if (x < 72) xPos = 72
+      else if (x > $width - 72) xPos = $width - 72
       else xPos = x
       setPos(xPos)
    }, [x])
@@ -26,7 +26,7 @@ const Tooltip = ({ coordinate: { x, y }, payload }) => {
          <div style={{ left: pos }} className="absolute bottom-0 mb-2 w-24 transform -translate-x-12 flex flex-col items-center">
             <div className="text-xs font-normal">{formattedDate}</div>
             <div className="text-xl">
-               <NumberFormat value={amount} displayType={'text'} thousandSeparator={true} prefix={'$'} />
+               <NumberFormat value={amount} displayType={'text'} thousandSeparator={true} prefix={'$'} decimalScale={2} fixedDecimalScale={true} />
             </div>
          </div>
       </div>

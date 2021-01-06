@@ -32,7 +32,7 @@ export default function AccountsPage() {
                title={'Accounts'}
                right={<AddAccount />}
             />
-            <Main data={data} message={'You have no accounts linked to your profile. Add an account to start seeing your data.'}>
+            <Main data={data} empty={Object.keys(data).length === 0} message={'You have no accounts linked to your profile. Add an account to start seeing your data.'}>
                <AccountsList data={data} />
             </Main>
             <Footer />

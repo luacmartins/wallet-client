@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react'
 import Head from 'next/head'
 import Layout from '../components/shared/Layout'
 import NavBar from '../components/desktop/NavBar'
@@ -48,7 +49,7 @@ export default function TrendsPage() {
                            className="w-screen md:w-full md:chart-h-80 lg:chart-h-96 xl:chart-h-112">
                            <MonthlySpendChart colors={colors} data={data.monthly.series} />
                         </div>
-                        <Timeframe timeframe={data.monthly.timeframe} setData={() => { }} />
+                        <Timeframe data={data.monthly.timeframe} setData={() => { }} />
                      </div>
                   </div>
                   <div className="md:bg-theme-beige-500 md:py-8 lg:py-12 md:my-4">
@@ -61,7 +62,7 @@ export default function TrendsPage() {
                      <div style={{ height: overtimeHeight }} className='w-screen md:h-80'>
                         <OvertimeSpending colors={colors} data={data.overtime.series} />
                      </div>
-                     <Timeframe timeframe={data.overtime.timeframe} setData={() => { }} />
+                     <Timeframe data={data.overtime.timeframe} setData={() => { }} />
                   </div>
                </>
                }
