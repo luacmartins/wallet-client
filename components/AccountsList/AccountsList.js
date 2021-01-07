@@ -38,7 +38,7 @@ const AccountsList = ({ data, setData }) => {
                   <div key={i} className="mx-4 mb-8">
                      <header className="text-xl mb-2">{key.replace('_', ' ')}</header>
                      {data[key].map((account) => (
-                        <Card key={account._id} onClick={() => handleClick(account)} className={`${account._id === active ? 'border border-theme-gray-700' : 'hover:border-theme-gray-200 hover:bg-theme-gray-200'} py-1 mb-2 cursor-pointer border border-white`}>
+                        <Card key={account._id} onClick={() => handleClick(account)} className={`${account._id === active ? 'md:border md:border-theme-gray-700' : 'hover:border-theme-gray-200 hover:bg-theme-gray-200'} py-1 mb-2 cursor-pointer border border-white`}>
                            <div className="flex items-center h-12 px-6">
                               <span className="flex-1 whitespace-no-wrap truncate mr-4">{account.nickname}</span>
                               <span>

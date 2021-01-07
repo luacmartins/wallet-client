@@ -9,7 +9,7 @@ const OvertimeTooltip = ({ coordinate: { x, y }, payload }) => {
    if (payload.length > 0) {
       ({ date, ...rest } = payload[0].payload)
       colors = Object.fromEntries(payload.map(item => ([item.name, item.color])))
-      categories = Object.entries(rest).map(item => ({ category: item[0], amount: item[1] }))
+      categories = Object.entries(rest).map(item => ({ category: item[0], amount: item[1] })).sort((a, b) => b.amount - a.amount)
       total = Object.values(rest).reduce((sum, item) => sum += item)
    }
 
