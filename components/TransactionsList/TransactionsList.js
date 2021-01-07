@@ -3,7 +3,7 @@ import fetcher from '../../utils/fetcher'
 import Transaction from '../Transaction'
 import Card from '../shared/Card'
 
-const TransactionsList = ({ data }) => {
+const TransactionsList = ({ data, fetchTransactions }) => {
    const [categories, setCategories] = useState([])
 
    useEffect(() => {
@@ -20,7 +20,7 @@ const TransactionsList = ({ data }) => {
             <div className="divide-theme-gray-600 divide-y opacity-50">
                {data.pending.length === 0 && <div className="font-normal">No pending transactions.</div>}
                {data.pending.length > 0 && data.pending.map((item, i) => (
-                  <Transaction key={i} item={item} disabled />
+                  <Transaction key={i} item={item} fetchTransactions={fetchTransactions} disabled />
                ))}
             </div>
          </div>
@@ -31,7 +31,7 @@ const TransactionsList = ({ data }) => {
          {data.posted.length > 0 && <Card className="px-4 md:px-0 py-2 md:py-0 mt-2">
             <div className="divide-theme-gray-600 divide-y">
                {data.posted.map((item, i) => (
-                  <Transaction key={i} item={item} categories={categories} />
+                  <Transaction key={i} item={item} categories={categories} fetchTransactions={fetchTransactions} />
                ))}
             </div>
          </Card>}

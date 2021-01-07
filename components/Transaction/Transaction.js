@@ -6,7 +6,7 @@ import Modal from '../mobile/Modal'
 import EditTransaction from '../mobile/EditTransaction'
 import EditTransactionDesktop from '../desktop/EditTransaction'
 
-const Transaction = ({ item, className, disabled, categories, ...props }) => {
+const Transaction = ({ item, className, disabled, categories, fetchTransactions, ...props }) => {
    const description = item.description.user || item.description.original
    const date = item.date.user || item.date.original
 
@@ -32,7 +32,9 @@ const Transaction = ({ item, className, disabled, categories, ...props }) => {
    }
 
    const handleSubmit = (id, payload) => {
-      fetcher.patch(`/api/transactions/${id}`, payload)
+      fetcher.patch(`/api/transactions/${id}`, payload).then(res => {
+         fetchTransactions()
+      })
       setIsVisible(false)
    }
 

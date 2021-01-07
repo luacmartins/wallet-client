@@ -6,7 +6,7 @@ import EditAccount from '../forms/EditAccount'
 import AddAccount from '../AddAccount'
 import Warning from '../icons/Warning'
 
-const AccountsList = ({ data }) => {
+const AccountsList = ({ data, setData }) => {
    const [isVisible, setIsVisible] = useState(false)
    const [account, setAccount] = useState('')
    const [active, setActive] = useState('')
@@ -54,7 +54,7 @@ const AccountsList = ({ data }) => {
             <div className="hidden md:sticky md:top-28 md:flex md:flex-col md:ml-4 lg:ml-8 md:flex-1 md:h-full ">
                <AddAccount />
                <Card className="px-4 py-8 md:py-12 w-full">
-                  <EditAccount data={account} />
+                  <EditAccount data={account} setData={setData} />
                </Card>
             </div>
          </div>
@@ -66,7 +66,7 @@ const AccountsList = ({ data }) => {
          >
             {account &&
                <div className="mx-8 mt-6">
-                  <EditAccount data={account} />
+                  <EditAccount data={account} setData={setData} />
                </div>}
          </Modal>
       </>

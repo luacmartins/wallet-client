@@ -4,6 +4,7 @@ import Card from '../shared/Card'
 
 const AverageSpending = ({ data }) => {
    const [scope, setScope] = useState('monthly')
+   const list = data.sort((a, b) => b.monthly - a.monthly)
 
    return (
       <div className="mx-6 my-16 md:my-4 md:flex md:flex-col md:items-center">
@@ -11,7 +12,7 @@ const AverageSpending = ({ data }) => {
          <header className="text-xl mb-6 hidden md:flex md:text-2xl xl:text-3xl md:mb-12">You average spending per category is...</header>
          <div className="flex flex-col items-center relative md:w-80 lg:w-112 xl:w-128">
             <Card className="px-4 pt-10 pb-4 w-full mt-5">
-               {data.map(item => (
+               {list.map(item => (
                   <div key={item.category} className="flex justify-between py-1 px-2 lg:text-xl">
                      <span>{item.category}</span>
                      <span>

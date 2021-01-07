@@ -21,7 +21,7 @@ export default function TransactionsPage() {
    const [page, setPage] = useState(1)
    const [filters, setFilters] = useState({})
 
-   useEffect(() => {
+   const fetchTransactions = () => {
       const query = qs.stringify({ ...filters, page }, { indices: false, arrayFormat: 'comma', addQueryPrefix: true })
 
       fetcher.get(`/api/transactions/${query}`)
@@ -30,11 +30,11 @@ export default function TransactionsPage() {
             setData(res.data)
          })
          .catch(e => console.log(e))
-   }, [filters, page])
-
-   const handleAdd = () => {
-      console.log('adding new transaction')
    }
+
+   useEffect(() => {
+      fetchTransactions()
+   }, [filters, page])
 
    const isEmpty = Object.keys(filters).length === 0
 
@@ -65,7 +65,7 @@ export default function TransactionsPage() {
                         <div className="hidden md:flex md:justify-between md:items-center">
                            {!isEmpty && <ResetFilters setValue={setFilters} />}
                         </div>
-                        {data && <TransactionsList data={data} handleAdd={handleAdd} />}
+                        {data && <TransactionsList data={data} fetchTransactions={fetchTransactions} />}
                         {totalPages > 1 && <Pagination value={page} setValue={setPage} totalPages={totalPages} />}
                      </div>
                   </div>

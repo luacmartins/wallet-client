@@ -12,6 +12,7 @@ import Main from '../components/shared/Main'
 
 export default function AccountsPage() {
    const [data, setData] = useState('')
+
    useEffect(() => {
       fetcher.get('/api/accounts')
          .then(res => {
@@ -33,7 +34,7 @@ export default function AccountsPage() {
                right={<AddAccount />}
             />
             <Main data={data} empty={Object.keys(data).length === 0} message={'You have no accounts linked to your profile. Add an account to start seeing your data.'}>
-               <AccountsList data={data} />
+               <AccountsList data={data} setData={setData} />
             </Main>
             <Footer />
             <MobileNavBar />

@@ -16,7 +16,7 @@ const types = [
    { value: 'Other_assets', text: 'Other asset' }
 ]
 
-const EditAccount = ({ data }) => {
+const EditAccount = ({ data, setData }) => {
    const [token, setToken] = useState(null)
    const [nickname, setNickname] = useState('')
    const [nameError, setNameError] = useState(false)
@@ -34,7 +34,11 @@ const EditAccount = ({ data }) => {
       e.preventDefault()
       setIsNameLoading(true)
       fetcher.patch(`/api/accounts/${id}`, { nickname, type })
-         .then(res => setAlert('Account updated',))
+         .then(res => {
+            setAlert('Account updated')
+            fetcher.get('/api/accounts')
+               .then(res => setData(res.data))
+         })
          .catch(e => console.log(e.response.data.error))
       setIsNameLoading(false)
    }
@@ -42,13 +46,19 @@ const EditAccount = ({ data }) => {
    const updateItem = (e, item) => {
       e.preventDefault()
       fetcher.post('/api/get-link-token', { item })
-         .then(res => setToken(res.data.link_token))
+         .then(res => {
+            setToken(res.data.link_token)
+            fetcher.get('/api/accounts')
+               .then(res => setData(res.data))
+         })
          .catch(e => console.log(e))
    }
 
    const handleDelete = (e, id) => {
       e.preventDefault()
       fetcher.delete(`/api/accounts/${id}`)
+      fetcher.get('/api/accounts')
+         .then(res => setData(res.data))
    }
 
    return (

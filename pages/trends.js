@@ -28,9 +28,9 @@ export default function TrendsPage() {
    // 309 is the height in pixel of the other components that are on screen, 
    // it is used as an offset to make the page full screen
    const height = useHeight(309)
-   // 15 is the relative offset between the monthly spend chart and the overtime chart,
+   // -30 is the relative offset between the monthly spend chart and the overtime chart,
    // since it has less components on screen
-   const overtimeHeight = height + 15
+   const overtimeHeight = height - 30
 
    useEffect(() => {
       const query = qs.stringify({ monthlyPeriod, overtimePeriod }, { indices: false, arrayFormat: 'comma', addQueryPrefix: true })
@@ -72,7 +72,7 @@ export default function TrendsPage() {
                   </div>
                   <div className="md:mt-16">
                      <header className="text-xl mx-6 mb-6 md:hidden">Overtime spending</header>
-                     <header className="hidden md:flex mx-6 mb-6 justify-center md:text-2xl xl:text-3xl">...and here is your spending overtime</header>
+                     <header className="hidden md:flex mx-6 mb-12 justify-center md:text-2xl xl:text-3xl">...and here is your spending overtime</header>
                      <OvertimeIntro data={data.overtime.summary} />
                      <div style={{ height: overtimeHeight }} className='w-screen md:h-80'>
                         <OvertimeSpending colors={colors} data={data.overtime.series} />
