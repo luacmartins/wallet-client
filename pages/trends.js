@@ -62,7 +62,7 @@ export default function TrendsPage() {
                         <div
                            style={{ height }}
                            className="w-screen md:w-full md:chart-h-80 lg:chart-h-96 xl:chart-h-112">
-                           <MonthlySpendChart colors={colors} data={data.monthly.series} />
+                           <MonthlySpendChart colors={colors} data={data.monthly.series} period={monthlyPeriod} />
                         </div>
                         <Timeframe data={data.monthly.timeframe} period={monthlyPeriod} setPeriod={setMonthlyPeriod} />
                      </div>

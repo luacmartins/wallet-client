@@ -1,6 +1,6 @@
 import NumberFormat from 'react-number-format'
 
-const SpendTooltip = ({ payload, total }) => {
+const SpendTooltip = ({ payload, total, period }) => {
    let category, amount, percent, fill
 
    if (payload[0]) {
@@ -24,7 +24,12 @@ const SpendTooltip = ({ payload, total }) => {
          <div>
             <span>in </span>
             <span style={{ color: fill }}>{category}</span>
-            <span> this month.</span>
+            {period === 'MTD' && <span> so far this month.</span>}
+            {period === '1M' && <span> in the past month.</span>}
+            {period === '6M' && <span> in the past six months.</span>}
+            {period === '1Y' && <span> in the past year.</span>}
+            {period === 'YTD' && <span> so far this year.</span>}
+
          </div>
          <div>
             <span>That's </span>

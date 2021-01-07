@@ -2,7 +2,7 @@ import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer } from 'recharts'
 import SpendTooltip from '../SpendTooltip'
 import useWidth from '../../../utils/useWidth'
 
-const MonthlySpend = ({ colors, data }) => {
+const MonthlySpend = ({ colors, data, period }) => {
    const total = data.reduce((sum, item) => sum += item.amount, 0)
    let styles = {}
 
@@ -24,7 +24,7 @@ const MonthlySpend = ({ colors, data }) => {
             </Pie>
             <Tooltip
                position={styles}
-               content={<SpendTooltip total={total} />}
+               content={<SpendTooltip total={total} period={period} />}
             />
          </PieChart>
       </ResponsiveContainer>
