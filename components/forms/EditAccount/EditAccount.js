@@ -73,6 +73,9 @@ const EditAccount = ({ data, setData }) => {
          {data.needsUpdate && <div className="flex items-center mt-4 md:mt-8 md:mb-12 w-72 md:w-80 mx-auto font-thin text-red-600">
             <Warning className="w-20 h-20 mr-4" />
             <span>We've encountered an error with this account. To fix it, please update your login credentials below.</span>
+            <div className="flex flex-col items-center mt-8">
+               <button onClick={(e) => updateItem(e, data.item)} className="text-theme-yellow-500 underline font-semibold" href="/">Update login credentials</button>
+            </div>
          </div>}
          <form className="w-72 md:w-80 mx-auto mt-8 mb-12">
             <div className="md:hidden">
@@ -82,9 +85,6 @@ const EditAccount = ({ data, setData }) => {
             <div className="hidden md:block">
                <Text value={nickname} setValue={setNickname} error={nameError} setError={setNameError} label={'floating'} labelText={'Account nickname'} />
                <Select data={types} value={type} setValue={setType} error={typeError} setError={setTypeError} label={'floating'} labelText={'Account type'} className="mt-6" />
-            </div>
-            <div className="flex flex-col items-center mt-8">
-               <button onClick={(e) => updateItem(e, data.item)} className="text-theme-yellow-500 underline font-semibold" href="/">Update login credentials</button>
             </div>
             <div className="mt-10 flex flex-col items-center">
                <button onClick={(e) => handleDelete(e, data._id)} className="text-red-600 underline font-semibold hover:text-red-700">Delete account</button>
