@@ -1,8 +1,8 @@
 import NumberFormat from 'react-number-format'
-import Select from '../../inputs/Select'
-import Text from '../../inputs/Text'
-import Date from '../../inputs/Date'
-import Button from '../../shared/Button'
+import Select from '../inputs/Select'
+import Text from '../inputs/Text'
+import Date from '../inputs/Date'
+import Button from '../shared/Button'
 
 const AddTransaction = () => {
    return (

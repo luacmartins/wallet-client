@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react'
 import NumberFormat from 'react-number-format'
-import PlaidLinkAccount from '../../PlaidLinkAccount'
-import fetcher from '../../../utils/fetcher'
-import Text from '../../inputs/Text'
-import Select from '../../inputs/Select'
-import Button from '../../shared/Button'
-import Alert from '../../shared/Alert'
-import Warning from '../../icons/Warning'
+import PlaidLinkAccount from '../PlaidLinkAccount'
+import fetcher from '../../utils/fetcher'
+import Text from '../inputs/Text'
+import Select from '../inputs/Select'
+import Button from '../shared/Button'
+import Alert from '../shared/Alert'
+import Warning from '../icons/Warning'
 
 const types = [
    { value: 'Cash', text: 'Cash' },

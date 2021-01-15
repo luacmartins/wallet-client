@@ -1,9 +1,11 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import axios from 'axios'
 import { useAuth } from '../../../utils/AuthProvider'
 import Password from '../../inputs/Password'
 import Button from '../../shared/Button'
 import Alert from '../../shared/Alert'
+
+import Input from '../../inputs/Input'
 
 const ChangePassword = () => {
    const [currentPassword, setCurrentPassword] = useState('')
@@ -14,9 +16,13 @@ const ChangePassword = () => {
    const [confirmPasswordError, setConfirmPasswordError] = useState(false)
    const [isLoading, setIsLoading] = useState(false)
    const [alert, setAlert] = useState({ type: '', message: '' })
+   const [data, setData] = useState({ fields: {}, error: {} })
 
    const { token } = useAuth()
 
+   useEffect(() => {
+      console.log(data)
+   }, [data])
    const handleSubmit = () => {
       if (confirmPassword !== newPassword) {
          setConfirmPasswordError(true)
@@ -51,6 +57,16 @@ const ChangePassword = () => {
    return (
       <>
          <form className="w-64 mt-12 sm:mt-0 md:w-96 mx-auto">
+            <Input
+               type={'text'}
+               name={'test'}
+               pattern={/w+/}
+               labelStyle={'outside'}
+               labelText={'test'}
+               data={data}
+               setData={setData}
+            />
+
             <Password value={currentPassword} setValue={setCurrentPassword} error={currentPasswordError} setError={setCurrentPasswordError} className="mt-2" placeholder={'Current password'} />
             <Password value={newPassword} setValue={setNewPassword} error={newPasswordError} setError={setNewPasswordError} className="mt-2" placeholder={'New password'} />
             <Password value={confirmPassword} setValue={setConfirmPassword} error={confirmPasswordError} setError={setConfirmPasswordError} className="mt-2" placeholder={'Confirm new password'} />
