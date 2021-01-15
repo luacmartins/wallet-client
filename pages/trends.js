@@ -37,7 +37,6 @@ export default function TrendsPage() {
       fetcher.get(`/api/trends/${query}`)
          .then(res => {
             setData(res.data)
-            console.log(res.data)
          })
          .catch()
    }, [monthlyPeriod, overtimePeriod])
@@ -54,7 +53,7 @@ export default function TrendsPage() {
                title={'Trends'}
             />
             <Main data={data} message={"Your trends will be available once we fetch data for your accounts."}>
-               {data && Object.keys(data).length > 0 && <>
+               {data && data.monthly[monthlyPeriod] && Object.keys(data).length > 0 && <>
                   <div className="md:flex md:justify-center">
                      <div className="md:w-80 lg:w-112 xl:w-128 flex items-center">
                         <MonthlySpendIntro data={data.monthly[monthlyPeriod].summary} period={monthlyPeriod} />
