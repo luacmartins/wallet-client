@@ -23,7 +23,7 @@ const colors = ['#fab131', '#5FB2FF', '#4462FF', '#FF7777', '#19B200', '#B900BD'
 export default function TrendsPage() {
    const [monthlyPeriod, setMonthlyPeriod] = useState('MTD')
    const [overtimePeriod, setOvertimePeriod] = useState('6M')
-   const [data, setData] = useState('')
+   const [data, setData] = useState(null)
 
    // 309 is the height in pixel of the other components that are on screen, 
    // it is used as an offset to make the page full screen
@@ -53,7 +53,7 @@ export default function TrendsPage() {
                title={'Trends'}
             />
             <Main data={data} message={"Your trends will be available once we fetch data for your accounts."}>
-               {data && data.monthly[monthlyPeriod] && Object.keys(data).length > 0 && <>
+               {data && Object.keys(data).length > 0 && <>
                   <div className="md:flex md:justify-center">
                      <div className="md:w-80 lg:w-112 xl:w-128 flex items-center">
                         <MonthlySpendIntro data={data.monthly[monthlyPeriod].summary} period={monthlyPeriod} />
