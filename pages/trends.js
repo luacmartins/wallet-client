@@ -40,7 +40,6 @@ export default function TrendsPage() {
          })
          .catch()
    }, [monthlyPeriod, overtimePeriod])
-   console.log(data)
 
    return (
       <>

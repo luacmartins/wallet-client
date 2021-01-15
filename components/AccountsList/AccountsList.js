@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import NumberFormat from 'react-number-format'
 import Card from '../shared/Card'
 import Modal from '../mobile/Modal'
-import EditAccount from '../forms/EditAccount'
+import EditAccount from '../EditAccount'
 import AddAccount from '../AddAccount'
 import Warning from '../icons/Warning'
 
