@@ -56,15 +56,15 @@ export default function TrendsPage() {
                {data && Object.keys(data).length > 0 && <>
                   <div className="md:flex md:justify-center">
                      <div className="md:w-80 lg:w-112 xl:w-128 flex items-center">
-                        <MonthlySpendIntro data={data.monthly[monthlyPeriod].summary} period={monthlyPeriod} />
+                        <MonthlySpendIntro data={data.monthly.summary} period={monthlyPeriod} />
                      </div>
                      <div className="md:w-80 lg:w-112 xl:w-128 lg:mb-4">
                         <div
                            style={{ height }}
                            className="w-screen md:w-full md:chart-h-80 lg:chart-h-96 xl:chart-h-112">
-                           <MonthlySpendChart colors={colors} data={data.monthly[monthlyPeriod].series} period={monthlyPeriod} />
+                           <MonthlySpendChart colors={colors} data={data.monthly.series} period={monthlyPeriod} />
                         </div>
-                        <Timeframe data={data.monthly[monthlyPeriod].timeframe} period={monthlyPeriod} setPeriod={setMonthlyPeriod} />
+                        <Timeframe data={data.monthly.timeframe} period={monthlyPeriod} setPeriod={setMonthlyPeriod} />
                      </div>
                   </div>
                   <div className="md:bg-theme-beige-500 md:py-8 lg:py-12 md:my-4">
@@ -73,11 +73,11 @@ export default function TrendsPage() {
                   <div className="md:mt-16">
                      <header className="text-xl mx-6 mb-6 md:hidden">Overtime spending</header>
                      <header className="hidden md:flex mx-6 mb-12 justify-center md:text-2xl xl:text-3xl">...and here is your spending overtime</header>
-                     <OvertimeIntro data={data.overtime[overtimePeriod].summary} />
+                     <OvertimeIntro data={data.overtime.summary} />
                      <div style={{ height: overtimeHeight }} className='w-screen md:h-80'>
-                        <OvertimeSpending colors={colors} data={data.overtime[overtimePeriod].series} />
+                        <OvertimeSpending colors={colors} data={data.overtime.series} />
                      </div>
-                     <Timeframe data={data.overtime[overtimePeriod].timeframe} period={overtimePeriod} setPeriod={setOvertimePeriod} />
+                     <Timeframe data={data.overtime.timeframe} period={overtimePeriod} setPeriod={setOvertimePeriod} />
                   </div>
                </>
                }
