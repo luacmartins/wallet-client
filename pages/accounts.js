@@ -1,6 +1,6 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import Head from 'next/head'
-import fetcher from '../utils/fetcher'
+import useAPI from '../utils/useAPI'
 import Layout from '../components/shared/Layout'
 import NavBar from '../components/desktop/NavBar'
 import MobileHeader from '../components/mobile/Header'
@@ -11,15 +11,8 @@ import AddAccount from '../components/AddAccount'
 import Main from '../components/shared/Main'
 
 export default function AccountsPage() {
-   const [data, setData] = useState('')
-
-   useEffect(() => {
-      fetcher.get('/api/accounts')
-         .then(res => {
-            setData(res.data)
-         })
-         .catch()
-   }, [])
+   const [edit, setEdit] = useState('')
+   const { data, isLoading, error } = useAPI('/api/accounts')
 
    return (
       <>
@@ -33,8 +26,8 @@ export default function AccountsPage() {
                title={'Accounts'}
                right={<AddAccount />}
             />
-            <Main data={data} empty={Object.keys(data).length === 0} message={'You have no accounts linked to your profile. Add an account to start seeing your data.'}>
-               <AccountsList data={data} setData={setData} />
+            <Main data={data} empty={data && Object.keys(data).length === 0} message={'You have no accounts linked to your profile. Add an account to start seeing your data.'}>
+               <AccountsList data={data} setData={setEdit} />
             </Main>
             <Footer />
             <MobileNavBar />

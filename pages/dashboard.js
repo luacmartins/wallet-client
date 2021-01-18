@@ -1,9 +1,8 @@
 // import libraries
-import { useState, useEffect } from 'react'
-import qs from 'qs'
+import { useState } from 'react'
 import Head from 'next/head'
-import fetcher from '../utils/fetcher'
 import useHeight from '../utils/useHeight'
+import useAPI from '../utils/useAPI'
 
 // import components
 import Layout from '../components/shared/Layout'
@@ -18,23 +17,17 @@ import TransactionsList from '../components/TransactionsList'
 import NetWorthChart from '../components/charts/NetWorth'
 import Timeframe from '../components/charts/Timeframe'
 import Main from '../components/shared/Main'
+import Spinner from '../components/shared/Spinner'
 
 export default function DashboardPage() {
-   const [data, setData] = useState('')
    const [period, setPeriod] = useState('3M')
-
-   useEffect(() => {
-      const query = qs.stringify({ period }, { indices: false, arrayFormat: 'comma', addQueryPrefix: true })
-      fetcher.get(`/api/dashboard/${query}`)
-         .then(res => {
-            setData(res.data)
-         })
-         .catch()
-   }, [period])
+   const { data, isLoading, error } = useAPI('/api/dashboard', { period })
 
    // 282 is the height offset of the other elements on the screen (header, navbar, etc)
    const height = useHeight(282)
 
+   if (error) return <div>Failed to load</div>
+   if (isLoading) return <Spinner />
    return (
       <>
          <Head>
@@ -46,8 +39,8 @@ export default function DashboardPage() {
             <MobileHeader
                right={<Profile />}
             />
-            <Main data={data} empty={data && data.accounts.length === 0} message={'Your summary will be displayed here once we fetch data for your accounts.'}>
-               {data && data.accounts.length > 0 && <>
+            <Main data={data} empty={data && data.accounts.length === 0} isLoading={isLoading} error={error} message={'Your summary will be displayed here once we fetch data for your accounts.'}>
+               {!isLoading && <>
                   <NetWorthIntro data={data.networth.summary} />
                   <div style={{ height: `${height}px` }} className="w-full">
                      <NetWorthChart data={data.networth.series} />

@@ -1,6 +1,5 @@
-import { useState, useEffect } from 'react'
-import qs from 'qs'
-import fetcher from '../utils/fetcher'
+import { useState } from 'react'
+import useAPI from '../utils/useAPI'
 import Head from 'next/head'
 import Layout from '../components/shared/Layout'
 import NavBar from '../components/desktop/NavBar'
@@ -18,28 +17,18 @@ import Main from '../components/shared/Main'
 import useHeight from '../utils/useHeight'
 
 const colors = ['#fab131', '#5FB2FF', '#4462FF', '#FF7777', '#19B200', '#B900BD']
-// import data from '../data/trendsData'
 
 export default function TrendsPage() {
    const [monthlyPeriod, setMonthlyPeriod] = useState('MTD')
    const [overtimePeriod, setOvertimePeriod] = useState('6M')
-   const [data, setData] = useState(null)
+   const { data, isLoading, error } = useAPI('/api/trends', { monthlyPeriod, overtimePeriod })
 
    // 309 is the height in pixel of the other components that are on screen, 
    // it is used as an offset to make the page full screen
-   const height = useHeight(309)
    // -30 is the relative offset between the monthly spend chart and the overtime chart,
    // since it has less components on screen
+   const height = useHeight(309)
    const overtimeHeight = height - 30
-
-   useEffect(() => {
-      const query = qs.stringify({ monthlyPeriod, overtimePeriod }, { indices: false, arrayFormat: 'comma', addQueryPrefix: true })
-      fetcher.get(`/api/trends/${query}`)
-         .then(res => {
-            setData(res.data)
-         })
-         .catch()
-   }, [monthlyPeriod, overtimePeriod])
 
    return (
       <>

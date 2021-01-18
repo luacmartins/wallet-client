@@ -1,7 +1,6 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import Head from 'next/head'
-import qs from 'qs'
-import fetcher from '../utils/fetcher'
+import useAPI from '../utils/useAPI'
 import Layout from '../components/shared/Layout'
 import NavBar from '../components/desktop/NavBar'
 import MobileHeader from '../components/mobile/Header'
@@ -16,25 +15,9 @@ import Pagination from '../components/Pagination'
 import Main from '../components/shared/Main'
 
 export default function TransactionsPage() {
-   const [data, setData] = useState()
-   const [totalPages, setTotalPages] = useState('')
    const [page, setPage] = useState(1)
    const [filters, setFilters] = useState({})
-
-   const fetchTransactions = () => {
-      const query = qs.stringify({ ...filters, page }, { indices: false, arrayFormat: 'comma', addQueryPrefix: true })
-
-      fetcher.get(`/api/transactions/${query}`)
-         .then(res => {
-            setTotalPages(parseInt(res.headers['x-total-pages']))
-            setData(res.data)
-         })
-         .catch(e => console.log(e))
-   }
-
-   useEffect(() => {
-      fetchTransactions()
-   }, [filters, page])
+   const { data, totalPages, isLoading, error } = useAPI('/api/transactions', { ...filters, page })
 
    const isEmpty = Object.keys(filters).length === 0
 
@@ -65,7 +48,7 @@ export default function TransactionsPage() {
                         <div className="hidden md:flex md:justify-between md:items-center">
                            {!isEmpty && <ResetFilters setValue={setFilters} />}
                         </div>
-                        {data && <TransactionsList data={data} fetchTransactions={fetchTransactions} />}
+                        {data && <TransactionsList data={data} />}
                         {totalPages > 1 && <Pagination value={page} setValue={setPage} totalPages={totalPages} />}
                      </div>
                   </div>

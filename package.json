@@ -18,7 +18,8 @@
       "react-number-format": "^4.4.1",
       "react-plaid-link": "^3.0.0",
       "react-script-hook": "^1.2.1",
-      "recharts": "^1.8.5"
+      "recharts": "^1.8.5",
+      "swr": "^0.4.0"
    },
    "devDependencies": {
       "@tailwindcss/custom-forms": "^0.2.1",
