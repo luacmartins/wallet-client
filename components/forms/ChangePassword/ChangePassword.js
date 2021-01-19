@@ -6,6 +6,7 @@ import Button from '../../shared/Button'
 import Alert from '../../shared/Alert'
 
 import Input from '../../inputs/Input'
+import useForm from '../../../utils/useForm'
 
 const ChangePassword = () => {
    const [currentPassword, setCurrentPassword] = useState('')
@@ -21,7 +22,7 @@ const ChangePassword = () => {
    const { token } = useAuth()
 
    useEffect(() => {
-      console.log(data)
+      // console.log(data)
    }, [data])
    const handleSubmit = () => {
       if (confirmPassword !== newPassword) {
@@ -54,18 +55,22 @@ const ChangePassword = () => {
          })
    }
 
+   const { data: formData, error, disabled, handleChange } = useForm()
+
    return (
       <>
          <form className="w-64 mt-12 sm:mt-0 md:w-96 mx-auto">
-            <Input
+            {/* <Input
                type={'text'}
-               name={'test'}
+               name={'number'}
                pattern={/w+/}
-               labelStyle={'outside'}
-               labelText={'test'}
-               data={data}
-               setData={setData}
-            />
+               label={'Number'}
+               pattern={/\d+/}
+               variant={'inside'}
+               value={formData}
+               error={error}
+               onChange={handleChange}
+            /> */}
 
             <Password value={currentPassword} setValue={setCurrentPassword} error={currentPasswordError} setError={setCurrentPasswordError} className="mt-2" placeholder={'Current password'} />
             <Password value={newPassword} setValue={setNewPassword} error={newPasswordError} setError={setNewPasswordError} className="mt-2" placeholder={'New password'} />

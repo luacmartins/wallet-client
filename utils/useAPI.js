@@ -23,8 +23,8 @@ export default function useAPI(endpoint, params) {
    const { data, error } = useSWR(url, fetcher)
 
    return {
-      data: data && data.data,
-      totalPages: data && parseInt(data.totalPages),
+      data: data?.data,
+      totalPages: parseInt(data?.totalPages),
       isLoading: !error && !data,
       error
    }

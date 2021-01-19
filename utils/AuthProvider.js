@@ -8,32 +8,8 @@ const publicRoutes = ['/', '/sign-up', '/forgot-password']
 
 const AuthProvider = ({ children }) => {
    const router = useRouter()
-   // const [token, setToken] = useState()
-   // const [user, setUser] = useState()
    const token = cookies.get('token')
    const user = cookies.get('user')
-
-   // function getToken() {
-   //    try {
-   //       const token = cookies.get('token')
-   //       const user = cookies.get('user')
-   //       if (!token) {
-   //          setToken(null)
-   //          setUser(null)
-   //       }
-   //       else {
-   //          setToken(token)
-   //          setUser(user)
-   //       }
-   //    } catch (error) {
-   //       console.log(error)
-   //    }
-   // }
-
-   // useEffect(() => {
-   //    getToken()
-   //    router.prefetch('/dashboard')
-   // }, [router.pathname])
 
    useEffect(() => {
       const handleRouteChange = (url) => {

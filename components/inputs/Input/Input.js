@@ -1,57 +1,76 @@
-import { useRef } from 'react'
+const Input = ({ type, name, pattern, label, variant, background, className, value, error, onChange, ...props }) => {
+   if (variant === 'inside') return (
+      <>
+         <div
+            className={`flex flex-col relative border rounded h-16 bg-white px-3 w-full font-semibold py-2
+         ${error[name] ? 'border-red-600 text-red-600' : 'border-theme-gray-600'}
+         ${background || ''}
+         ${className || ''}`
+            }>
+            <label className={`text-sm px-1 ${background || ''} ${error[name] ? 'text-red-600' : 'text-theme-gray-700'}`} htmlFor={name}>
+               {label}
+            </label>
+            <input
+               type={type}
+               name={name}
+               className={`h-12 px-1 outline-none font-semibold placeholder-theme-gray-700 capitalize ${background || ''}`}
+               value={value[name] || ''}
+               onChange={(e) => onChange(e, pattern)}
+               autoComplete={'off'}
+               {...props}
+            />
+         </div>
+      </>)
 
-const Text = ({ type, name, pattern, labelStyle, labelText, background, className, data, setData, ...props }) => {
-   const inputEl = useRef(null)
+   if (variant === 'floating') return (
+      <>
+         <div
+            className={`flex flex-col relative border rounded h-12 bg-white px-3 w-full font-semibold
+      ${error[name] ? 'border-red-600 text-red-600' : 'border-theme-gray-600'}
+      ${background || ''}
+      ${className || ''}`
+            }>
+            <label className={`absolute text-sm transform -translate-y-3 bg-white px-1 ${background || ''} ${error[name] ? 'text-red-600' : 'text-theme-gray-700'}`} htmlFor={name}>
+               {label}
+            </label>
+            <input
+               type={type}
+               name={name}
+               className={`h-12 px-1 outline-none font-semibold placeholder-theme-gray-700 capitalize ${background || ''}`}
+               value={value[name] || ''}
+               onChange={(e) => onChange(e, pattern)}
+               {...props}
+            />
+         </div>
+      </>)
 
-   const handleClick = () => {
-      inputEl.current.focus()
-   }
 
-   const handleOnChange = (e) => {
-      setData({ ...data, fields: { [e.target.name]: e.target.value } })
-      if (!data[e.target.name] || pattern.test(data[e.target.name].toLowerCase())) {
-         setData({ ...data, error: { [e.target.name]: 'Invalid information' } })
-      }
-   }
 
-   const handleOnBlur = () => {
-      if (!data[name] || !pattern.test(data[name].toLowerCase())) {
-         setData({ ...data, error: { [name]: 'Invalid field' } })
-      } else {
-         delete data.error[name]
-         setData(data)
-      }
-   }
 
    return (
       <>
-         <div onClick={handleClick}
+         <div
             className={
                `flex flex-col relative border rounded h-12 bg-white px-3 w-full font-semibold 
-               ${labelStyle === 'inside' && 'h-16 py-2'}
-               ${data.error[name] ? 'border-red-600 text-red-600' : 'border-theme-gray-600'}
+               ${error[name] ? 'border-red-600 text-red-600' : 'border-theme-gray-600'}
                ${background || ''}
                ${className || ''}`
             }>
             <label
-               className={
-                  `${labelStyle === 'inside' && 'text-sm px-1'}
-                  ${labelStyle === 'floating' && 'absolute text-sm transform -translate-y-3 bg-white px-1'}
+               className={`
                   ${background || ''}
-                  ${data.error[name] ? 'text-red-600' : 'text-theme-gray-700'}`
+                  ${error[name] ? 'text-red-600' : 'text-theme-gray-700'}`
                }
                htmlFor={name}
             >
-               {labelText}
+               {label}
             </label>
             <input
-               ref={inputEl}
                type={type}
                name={name}
                className={`h-12 px-1 outline-none font-semibold placeholder-theme-gray-700 capitalize ${background || ''}`}
-               value={data[name]}
-               onChange={handleOnChange}
-               onBlur={handleOnBlur}
+               value={value[name] || ''}
+               onChange={(e) => onChange(e, pattern)}
                {...props}
             />
          </div>
@@ -59,4 +78,4 @@ const Text = ({ type, name, pattern, labelStyle, labelText, background, classNam
    );
 }
 
-export default Text;
+export default Input;
