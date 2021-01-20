@@ -1,90 +1,63 @@
-import { useState, useEffect } from 'react'
-import axios from 'axios'
-import { useAuth } from '../../../utils/AuthProvider'
-import Password from '../../inputs/Password'
+import { useForm } from 'react-hook-form'
+import { useAuth } from '../../../utils/useAPI'
+import pattern from '../../../utils/validations'
 import Button from '../../shared/Button'
-import Alert from '../../shared/Alert'
-
 import Input from '../../inputs/Input'
-import useForm from '../../../utils/useForm'
 
 const ChangePassword = () => {
-   const [currentPassword, setCurrentPassword] = useState('')
-   const [newPassword, setNewPassword] = useState('')
-   const [confirmPassword, setConfirmPassword] = useState('')
-   const [currentPasswordError, setCurrentPasswordError] = useState(false)
-   const [newPasswordError, setNewPasswordError] = useState(false)
-   const [confirmPasswordError, setConfirmPasswordError] = useState(false)
-   const [isLoading, setIsLoading] = useState(false)
-   const [alert, setAlert] = useState({ type: '', message: '' })
-   const [data, setData] = useState({ fields: {}, error: {} })
-
-   const { token } = useAuth()
-
-   useEffect(() => {
-      // console.log(data)
-   }, [data])
-   const handleSubmit = () => {
-      if (confirmPassword !== newPassword) {
-         setConfirmPasswordError(true)
-         setAlert({ type: 'error', message: 'Your new password does not match. Please verify and try again.' })
-         return
-      }
-      setIsLoading(true)
-
-      axios.patch(
-         `${process.env.NEXT_PUBLIC_SERVER_URL}/api/change-password`,
-         {
-            currentPassword,
-            newPassword
-         },
-         { headers: { 'Authorization': token } }
-      ).then(res => {
-         setAlert({ type: 'success', message: 'Your password was successfully changed!' })
-         setCurrentPassword('')
-         setNewPassword('')
-         setConfirmPassword('')
-         setIsLoading(false)
-      })
-         .catch(e => {
-            setAlert({ type: 'error', message: e.response.data.error })
-            setCurrentPassword('')
-            setNewPassword('')
-            setConfirmPassword('')
-            setIsLoading(false)
-         })
-   }
-
-   const { data: formData, error, disabled, handleChange } = useForm()
+   const { register, errors, handleSubmit, getValues, formState: { isSubmitting } } = useForm()
+   const { alert, updatePassword } = useAuth()
 
    return (
       <>
-         <form className="w-64 mt-12 sm:mt-0 md:w-96 mx-auto">
-            {/* <Input
-               type={'text'}
-               name={'number'}
-               pattern={/w+/}
-               label={'Number'}
-               pattern={/\d+/}
-               variant={'inside'}
-               value={formData}
-               error={error}
-               onChange={handleChange}
-            /> */}
-
-            <Password value={currentPassword} setValue={setCurrentPassword} error={currentPasswordError} setError={setCurrentPasswordError} className="mt-2" placeholder={'Current password'} />
-            <Password value={newPassword} setValue={setNewPassword} error={newPasswordError} setError={setNewPasswordError} className="mt-2" placeholder={'New password'} />
-            <Password value={confirmPassword} setValue={setConfirmPassword} error={confirmPasswordError} setError={setConfirmPasswordError} className="mt-2" placeholder={'Confirm new password'} />
+         <form onSubmit={handleSubmit(updatePassword)} className="w-64 mt-12 sm:mt-0 md:w-96 mx-auto grid gap-y-2">
+            {alert && <span className={`rounded font-normal text-sm ${alert.type === 'success' ? 'bg-green-300 text-green-700 mb-4 p-2' : alert.type === 'error' ? 'bg-red-300 text-red-700 mb-4 p-2' : ''}`}>{alert.message}</span>}
+            <Input
+               register={register({
+                  required: 'Please provide your current password.',
+                  pattern: {
+                     value: pattern.password,
+                     message: 'Your password does not contain the necessary characters.'
+                  }
+               })}
+               type={'password'}
+               name={'currentPassword'}
+               placeholder={'Current password'}
+               error={errors}
+            />
+            <Input
+               register={register({
+                  required: 'Please provide your new password.',
+                  pattern: {
+                     value: pattern.password,
+                     message: 'Your password does not contain the necessary characters.'
+                  }
+               })}
+               type={'password'}
+               name={'newPassword'}
+               placeholder={'New password'}
+               error={errors}
+            />
+            <Input
+               register={register({
+                  required: 'Please re-enter your new password.',
+                  validate: {
+                     passwordMatch: value => (value === getValues().newPassword || 'Your passwords do not match!')
+                  }
+               })}
+               type={'password'}
+               name={'confirmPassword'}
+               placeholder={'Confirm new password'}
+               error={errors}
+            />
             <Button
                className="block mt-4 mx-auto"
-               onClick={handleSubmit}
-               isLoading={isLoading}
-               disabled={newPasswordError || confirmPasswordError || !newPassword || !confirmPassword || isLoading}
+               type={'submit'}
+               isLoading={isSubmitting}
             >
                Done
             </Button>
          </form>
-         <Alert message={alert.message} setMessage={setAlert} type={alert.type} />
       </>
    );
 }

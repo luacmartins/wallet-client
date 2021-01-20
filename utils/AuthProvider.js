@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, useEffect } from 'react'
+import { createContext, useContext, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import { Cookies } from 'react-cookie'
 const AuthContext = createContext()

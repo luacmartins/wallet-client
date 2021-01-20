@@ -1,81 +1,34 @@
-const Input = ({ type, name, pattern, label, variant, background, className, value, error, onChange, ...props }) => {
-   if (variant === 'inside') return (
-      <>
-         <div
-            className={`flex flex-col relative border rounded h-16 bg-white px-3 w-full font-semibold py-2
-         ${error[name] ? 'border-red-600 text-red-600' : 'border-theme-gray-600'}
-         ${background || ''}
-         ${className || ''}`
-            }>
-            <label className={`text-sm px-1 ${background || ''} ${error[name] ? 'text-red-600' : 'text-theme-gray-700'}`} htmlFor={name}>
-               {label}
-            </label>
-            <input
-               type={type}
-               name={name}
-               className={`h-12 px-1 outline-none font-semibold placeholder-theme-gray-700 capitalize ${background || ''}`}
-               value={value[name] || ''}
-               onChange={(e) => onChange(e, pattern)}
-               autoComplete={'off'}
-               {...props}
-            />
-         </div>
-      </>)
-
-   if (variant === 'floating') return (
-      <>
-         <div
-            className={`flex flex-col relative border rounded h-12 bg-white px-3 w-full font-semibold
-      ${error[name] ? 'border-red-600 text-red-600' : 'border-theme-gray-600'}
-      ${background || ''}
-      ${className || ''}`
-            }>
-            <label className={`absolute text-sm transform -translate-y-3 bg-white px-1 ${background || ''} ${error[name] ? 'text-red-600' : 'text-theme-gray-700'}`} htmlFor={name}>
-               {label}
-            </label>
-            <input
-               type={type}
-               name={name}
-               className={`h-12 px-1 outline-none font-semibold placeholder-theme-gray-700 capitalize ${background || ''}`}
-               value={value[name] || ''}
-               onChange={(e) => onChange(e, pattern)}
-               {...props}
-            />
-         </div>
-      </>)
-
-
-
-
+const Input = ({ type, name, pattern, placeholder, register, label, variant, className, error, ...props }) => {
    return (
-      <>
-         <div
-            className={
-               `flex flex-col relative border rounded h-12 bg-white px-3 w-full font-semibold 
+      <div
+         className={
+            `flex flex-col relative border rounded bg-white px-3 w-full font-semibold py-2
+               ${variant === 'inside' ? 'h-16' : 'h-12'}
                ${error[name] ? 'border-red-600 text-red-600' : 'border-theme-gray-600'}
-               ${background || ''}
                ${className || ''}`
-            }>
-            <label
-               className={`
-                  ${background || ''}
+         }
+      >
+         <label
+            htmlFor={name}
+            className={
+               `${variant === 'inside' ? 'text-sm px-1 ' : ''}
+                  ${variant === 'floating' ? 'absolute text-sm transform -translate-y-5 bg-white px-1' : ''}
                   ${error[name] ? 'text-red-600' : 'text-theme-gray-700'}`
-               }
-               htmlFor={name}
-            >
-               {label}
-            </label>
-            <input
-               type={type}
-               name={name}
-               className={`h-12 px-1 outline-none font-semibold placeholder-theme-gray-700 capitalize ${background || ''}`}
-               value={value[name] || ''}
-               onChange={(e) => onChange(e, pattern)}
-               {...props}
-            />
-         </div>
-      </>
-   );
+            }
+         >
+            {label}
+         </label>
+         <input
+            ref={register}
+            type={type}
+            name={name}
+            placeholder={placeholder}
+            autoComplete={'off'}
+            {...props}
+            className={'h-12 px-1 outline-none font-semibold placeholder-theme-gray-700 capitalize'}
+         />
+      </div>
+   )
 }
 
 export default Input;
