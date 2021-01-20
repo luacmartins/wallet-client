@@ -12,14 +12,15 @@ import ResetFilters from '../components/ResetFilters'
 import FiltersModal from '../components/mobile/FilterModal'
 import Filters from '../components/FiltersList'
 import Pagination from '../components/Pagination'
-import Main from '../components/shared/Main'
+import Suspense from '../components/shared/Suspense'
 
 export default function TransactionsPage() {
    const [page, setPage] = useState(1)
    const [filters, setFilters] = useState({})
-   const { data, totalPages, isLoading, error } = useData('/api/transactions', { ...filters, page })
 
-   const isEmpty = Object.keys(filters).length === 0
+   const { data, totalPages, isLoading, error } = useData('/api/transactions', { ...filters, page })
+   const hasNoData = !data || (data && Object.keys(data).length === 0)
+   const hasFilters = Object.keys(filters).length !== 0
 
    return (
       <>
@@ -33,27 +34,33 @@ export default function TransactionsPage() {
                title={'Transactions'}
                left={<FiltersModal value={filters} setValue={setFilters} />}
             />
-            <Main data={data} empty={data && Object.keys(data).length === 0} message={'You have no transactions. Add more accounts to see your transactions.'}>
-               <div className="md:w-180 lg:w-240 md:mx-auto md:mt-8">
-                  <div className="mx-4 mb-4 md:hidden">
-                     <Search value={filters} setValue={setFilters} />
-                     {!isEmpty && <ResetFilters setValue={setFilters} />}
-                  </div>
-                  <div className="flex md:gap-x-10 lg:gap-x-12">
-                     <div className="hidden md:flex md:flex-col gap-y-6 md:w-64">
+
+            {error || isLoading || hasNoData ?
+               <Suspense error={error} isLoading={isLoading} />
+               :
+               <main className="flex flex-col flex-1 mt-4 mb-12 md:mt-12">
+                  <div className="md:w-180 lg:w-240 md:mx-auto md:mt-8">
+                     <div className="mx-4 mb-4 md:hidden">
                         <Search value={filters} setValue={setFilters} />
-                        <Filters value={filters} setValue={setFilters} />
+                        {hasFilters && <ResetFilters setValue={setFilters} />}
                      </div>
-                     <div className="w-full md:flex-1">
-                        <div className="hidden md:flex md:justify-between md:items-center">
-                           {!isEmpty && <ResetFilters setValue={setFilters} />}
+                     <div className="flex md:gap-x-10 lg:gap-x-12">
+                        <div className="hidden md:flex md:flex-col gap-y-6 md:w-64">
+                           <Search value={filters} setValue={setFilters} />
+                           <Filters value={filters} setValue={setFilters} />
                         </div>
-                        {data && <TransactionsList data={data} />}
-                        {totalPages > 1 && <Pagination value={page} setValue={setPage} totalPages={totalPages} />}
+                        <div className="w-full md:flex-1">
+                           <div className="hidden md:flex md:justify-between md:items-center">
+                              {hasFilters && <ResetFilters setValue={setFilters} />}
+                           </div>
+                           {data && <TransactionsList data={data} />}
+                           {totalPages > 1 && <Pagination value={page} setValue={setPage} totalPages={totalPages} />}
+                        </div>
                      </div>
                   </div>
-               </div>
-            </Main>
+               </main>
+            }
+
             <Footer />
             <MobileNavBar />
          </Layout>

@@ -12,7 +12,7 @@ import MonthlySpendIntro from '../components/MonthlySpendIntro'
 import AverageSpending from '../components/AverageSpending'
 import OvertimeSpending from '../components/charts/OvertimeSpending'
 import OvertimeIntro from '../components/OvertimeIntro'
-import Main from '../components/shared/Main'
+import Suspense from '../components/shared/Suspense'
 
 import useHeight from '../utils/useHeight'
 
@@ -21,7 +21,9 @@ const colors = ['#fab131', '#5FB2FF', '#4462FF', '#FF7777', '#19B200', '#B900BD'
 export default function TrendsPage() {
    const [monthlyPeriod, setMonthlyPeriod] = useState('MTD')
    const [overtimePeriod, setOvertimePeriod] = useState('6M')
+
    const { data, isLoading, error } = useData('/api/trends', { monthlyPeriod, overtimePeriod })
+   const hasNoData = !data || (data && Object.keys(data).length === 0)
 
    // 309 is the height in pixel of the other components that are on screen, 
    // it is used as an offset to make the page full screen
@@ -41,8 +43,11 @@ export default function TrendsPage() {
             <MobileHeader
                title={'Trends'}
             />
-            <Main data={data} message={"Your trends will be available once we fetch data for your accounts."}>
-               {data && Object.keys(data).length > 0 && <>
+
+            {error || isLoading || hasNoData ?
+               <Suspense error={error} isLoading={isLoading} />
+               :
+               <main className="flex flex-col flex-1 mt-4 mb-12 md:mt-12">
                   <div className="md:flex md:justify-center">
                      <div className="md:w-80 lg:w-112 xl:w-128 flex items-center">
                         <MonthlySpendIntro data={data.monthly.summary} period={monthlyPeriod} />
@@ -68,9 +73,8 @@ export default function TrendsPage() {
                      </div>
                      <Timeframe data={data.overtime.timeframe} period={overtimePeriod} setPeriod={setOvertimePeriod} />
                   </div>
-               </>
-               }
-            </Main>
+               </main>
+            }
             <Footer />
             <MobileNavBar />
          </Layout>

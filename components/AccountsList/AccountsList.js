@@ -24,12 +24,6 @@ const AccountsList = ({ data, setData }) => {
       setAccount(accountData)
    }
 
-   if (data.length === 0) return (
-      <Card>
-         <AddAccount />
-      </Card>
-   )
-
    return (
       <>
          <div className="md:mt-8 md:flex md:w-full md:px-4 lg:w-240 lg:mx-auto">

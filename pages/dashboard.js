@@ -16,19 +16,16 @@ import Footer from '../components/desktop/Footer'
 import TransactionsList from '../components/TransactionsList'
 import NetWorthChart from '../components/charts/NetWorth'
 import Timeframe from '../components/charts/Timeframe'
-import Main from '../components/shared/Main'
-import Spinner from '../components/shared/Spinner'
+import Suspense from '../components/shared/Suspense'
 
 export default function DashboardPage() {
    const [period, setPeriod] = useState('3M')
    const { data, isLoading, error } = useData('/api/dashboard', { period })
+   const hasNoData = !data || (data && Object.keys(data).length === 0)
 
    // 282 is the height offset of the other elements on the screen (header, navbar, etc)
    const height = useHeight(282)
 
-   if (error) return <div>Failed to load</div>
-   if (isLoading) return <Spinner />
-   if (!data) return <div>No data to show for now.</div>
    return (
       <>
          <Head>
@@ -40,8 +37,11 @@ export default function DashboardPage() {
             <MobileHeader
                right={<Profile />}
             />
-            <Main data={data} empty={data && data.accounts.length === 0} isLoading={isLoading} error={error} message={'Your summary will be displayed here once we fetch data for your accounts.'}>
-               {!isLoading && <>
+
+            {error || isLoading || hasNoData ?
+               <Suspense error={error} isLoading={isLoading} />
+               :
+               <main className="flex flex-col flex-1 mt-4 mb-12 md:mt-12">
                   <NetWorthIntro data={data.networth.summary} />
                   <div style={{ height: `${height}px` }} className="w-full">
                      <NetWorthChart data={data.networth.series} />
@@ -55,9 +55,8 @@ export default function DashboardPage() {
                         <AccountsOverview data={data.accounts} />
                      </div>
                   </div>
-               </>
-               }
-            </Main>
+               </main>
+            }
             <Footer />
             <MobileNavBar />
          </Layout>

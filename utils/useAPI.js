@@ -80,7 +80,6 @@ export const useAuth = () => {
          cookies.set('user', res.data.user)
          router.push('/dashboard')
       }).catch(e => {
-         console.log(e)
          setAlert({ type: 'error', message: 'Unable to sign up. Please try again later.' })
          setTimeout(() => { setAlert({ type: '', message: '' }) }, 3000)
       })
@@ -95,6 +94,9 @@ export const useAuth = () => {
    }
 
    const resetPassword = (data) => {
+      // send request to API
+      // if success redirect to dashboard
+      // if error, display error
       console.log(data)
    }
 
