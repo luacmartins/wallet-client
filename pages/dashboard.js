@@ -2,7 +2,7 @@
 import { useState } from 'react'
 import Head from 'next/head'
 import useHeight from '../utils/useHeight'
-import useAPI from '../utils/useAPI'
+import { useData } from '../utils/useAPI'
 
 // import components
 import Layout from '../components/shared/Layout'
@@ -21,7 +21,7 @@ import Spinner from '../components/shared/Spinner'
 
 export default function DashboardPage() {
    const [period, setPeriod] = useState('3M')
-   const { data, isLoading, error } = useAPI('/api/dashboard', { period })
+   const { data, isLoading, error } = useData('/api/dashboard', { period })
 
    // 282 is the height offset of the other elements on the screen (header, navbar, etc)
    const height = useHeight(282)

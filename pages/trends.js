@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import useAPI from '../utils/useAPI'
+import { useData } from '../utils/useAPI'
 import Head from 'next/head'
 import Layout from '../components/shared/Layout'
 import NavBar from '../components/desktop/NavBar'
@@ -21,7 +21,7 @@ const colors = ['#fab131', '#5FB2FF', '#4462FF', '#FF7777', '#19B200', '#B900BD'
 export default function TrendsPage() {
    const [monthlyPeriod, setMonthlyPeriod] = useState('MTD')
    const [overtimePeriod, setOvertimePeriod] = useState('6M')
-   const { data, isLoading, error } = useAPI('/api/trends', { monthlyPeriod, overtimePeriod })
+   const { data, isLoading, error } = useData('/api/trends', { monthlyPeriod, overtimePeriod })
 
    // 309 is the height in pixel of the other components that are on screen, 
    // it is used as an offset to make the page full screen

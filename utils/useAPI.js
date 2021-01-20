@@ -13,7 +13,7 @@ const fetcher = url => axiosConfig.get(url).then(res => {
    return data
 })
 
-export default function useAPI(endpoint, params) {
+export const useData = (endpoint, params) => {
    let url
 
    if (params) {

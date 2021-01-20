@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import Head from 'next/head'
-import useAPI from '../utils/useAPI'
+import { useData } from '../utils/useAPI'
 import Layout from '../components/shared/Layout'
 import NavBar from '../components/desktop/NavBar'
 import MobileHeader from '../components/mobile/Header'
@@ -17,7 +17,7 @@ import Main from '../components/shared/Main'
 export default function TransactionsPage() {
    const [page, setPage] = useState(1)
    const [filters, setFilters] = useState({})
-   const { data, totalPages, isLoading, error } = useAPI('/api/transactions', { ...filters, page })
+   const { data, totalPages, isLoading, error } = useData('/api/transactions', { ...filters, page })
 
    const isEmpty = Object.keys(filters).length === 0
 

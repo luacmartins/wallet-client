@@ -99,7 +99,7 @@ const EditAccount = ({ data, setData }) => {
             </div>
          </form>
          {token && <PlaidLinkAccount item={data.item} token={token} update={true} />}
-         <Alert message={alert} setMessage={setAlert} />
+         {/* <Alert message={alert} setMessage={setAlert} /> */}
       </>
    );
 }
