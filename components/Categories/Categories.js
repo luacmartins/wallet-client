@@ -1,56 +1,37 @@
-import { useState, useEffect } from 'react'
-import fetcher from '../../utils/fetcher'
+import { useCategories } from '../../utils/useAPI'
+import Alert from '../shared/Alert'
 import Card from '../shared/Card'
 import AddCategory from '../AddCategory'
 import EditCategory from '../EditCategory'
+import Spinner from '../shared/Spinner'
 
 const Categories = () => {
-   const [categories, setCategories] = useState([])
+   const { alert, getCategories, addCategory, editCategory, deleteCategory } = useCategories()
+   const { categories, isLoading } = getCategories()
 
-   const getData = async () => {
-      fetcher.get('/api/category')
-         .then(res => setCategories(res.data))
-         .catch(e => console.log(e))
-   }
-
-   useEffect(() => {
-      getData()
-   }, [])
-
-   const handleAdd = async (data) => {
-      await fetcher.post('/api/category', data)
-      await getData()
-   }
-
-   const handleEdit = async (id, update) => {
-      await fetcher.patch(`/api/category/${id}`, update)
-      await getData()
-   }
-
-   const handleDelete = async (id) => {
-      await fetcher.delete(`/api/category/${id}`)
-      await getData()
-   }
-
+   if (isLoading) return <Spinner />
    return (
       <>
+         <Alert data={alert} />
+
          {
             categories.map(category => (
                !category.parent && <Card key={category.name} className="w-11/12 sm:w-full mx-auto sm:mx-0 mt-2 mb-6">
                   <div className="flex flex-col divide-y divide-theme-gray-600">
-                     <EditCategory key={category.id} category={category} handleEdit={handleEdit} handleDelete={handleDelete} />
+                     <EditCategory key={category.id} category={category} handleEdit={editCategory} handleDelete={deleteCategory} />
                      {categories.map(child => (
-                        child.parent === category._id && <EditCategory key={child._id} category={child} parent={category._id} handleEdit={handleEdit} handleDelete={handleDelete} />
+                        child.parent === category._id && <EditCategory key={child._id} category={child} parent={category._id} handleEdit={editCategory} handleDelete={deleteCategory} />
                      ))}
                      <div className="text-theme-gray-700">
-                        <AddCategory parent={category._id} handleAdd={handleAdd} />
+                        <AddCategory parent={category._id} handleAdd={addCategory} />
                      </div>
                   </div>
                </Card>
             ))
          }
+
          <Card className="w-11/12 sm:w-full mx-auto sm:mx-0 mt-2 mb-20 md:mb-12">
-            <AddCategory subcategory={false} handleAdd={handleAdd} />
+            <AddCategory subcategory={false} handleAdd={addCategory} />
          </Card>
       </>
    );

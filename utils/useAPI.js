@@ -13,6 +13,7 @@ const fetcher = url => axiosConfig.get(url).then(res => {
    return data
 })
 
+// Use data hook
 export const useData = (endpoint, params) => {
    let url
 
@@ -33,20 +34,25 @@ export const useData = (endpoint, params) => {
    }
 }
 
+
+// Use Auth hook
 export const useAuth = () => {
    const [alert, setAlert] = useState({ type: '', message: '' })
    const cookies = new Cookies()
    const router = useRouter()
 
+   const flash = (alert) => {
+      setAlert(alert)
+      setTimeout(() => setAlert({ type: '', message: '' }), 3000)
+   }
+
    const updatePassword = (data) => {
       axiosConfig.patch('/api/change-password', data)
          .then(() => {
-            setAlert({ type: 'success', message: 'Your password was successfully updated!' })
-            setTimeout(() => { setAlert({ type: '', message: '' }) }, 3000)
+            flash({ type: 'success', message: 'Your password was successfully updated!' })
          })
          .catch(e => {
-            setAlert({ type: 'error', message: 'Your current password is incorrect.' })
-            setTimeout(() => { setAlert({ type: '', message: '' }) }, 3000)
+            flash({ type: 'error', message: 'Your current password is incorrect.' })
          })
    }
 
@@ -57,8 +63,7 @@ export const useAuth = () => {
             cookies.set('user', res.data.user)
             router.push('/dashboard')
          }).catch(() => {
-            setAlert({ type: 'error', message: 'Invalid credentials. Please try again.' })
-            setTimeout(() => { setAlert({ type: '', message: '' }) }, 3000)
+            flash({ type: 'error', message: 'Invalid credentials. Please try again.' })
          })
    }
 
@@ -69,8 +74,7 @@ export const useAuth = () => {
             cookies.set('user', res.data.user)
             router.push('/dashboard')
          }).catch(() => {
-            setAlert({ type: 'error', message: 'There was a problem loggin in. Please try again later.' })
-            setTimeout(() => { setAlert({ type: '', message: '' }) }, 3000)
+            flash({ type: 'error', message: 'There was a problem loggin in. Please try again later.' })
          })
    }
 
@@ -80,8 +84,7 @@ export const useAuth = () => {
          cookies.set('user', res.data.user)
          router.push('/dashboard')
       }).catch(e => {
-         setAlert({ type: 'error', message: 'Unable to sign up. Please try again later.' })
-         setTimeout(() => { setAlert({ type: '', message: '' }) }, 3000)
+         flash({ type: 'error', message: 'Unable to sign up. Please try again later.' })
       })
    }
 
@@ -101,4 +104,39 @@ export const useAuth = () => {
    }
 
    return { alert, updatePassword, loginUser, loginGuest, signUp, forgotPassword, resetPassword }
+}
+
+
+// Use categories hook
+export const useCategories = () => {
+   const [alert, setAlert] = useState({ type: '', message: '' })
+
+   const flash = (alert) => {
+      setAlert(alert)
+      setTimeout(() => setAlert({ type: '', message: '' }), 3000)
+   }
+
+   const getCategories = () => {
+      const { data, error } = useSWR('/api/category', fetcher)
+      if (error) flash({ type: 'error', message: 'There was an error loading your categories. Please try again later.' })
+
+      return {
+         categories: data?.data,
+         isLoading: !error && !data,
+      }
+   }
+
+   const addCategory = async (data) => {
+      axiosConfig.post('/api/category', data).catch(() => flash({ type: 'error', message: 'There was an error adding to your categories. Please try again' }))
+   }
+
+   const editCategory = async (id, data) => {
+      axiosConfig.patch(`/api/category/${id}`, data).catch(() => flash({ type: 'error', message: 'There was an error editing your category. Please try again' }))
+   }
+
+   const deleteCategory = async (id) => {
+      axiosConfig.delete(`/api/category/${id}`).catch(() => flash({ type: 'error', message: 'There was an error deleting your category. Please try again' }))
+   }
+
+   return { alert, getCategories, addCategory, editCategory, deleteCategory }
 }
