@@ -7,6 +7,13 @@ export default function useValidation() {
             message: 'Please provide a valid name.'
          }
       },
+      text: {
+         required: 'Please fill in this field.',
+         pattern: {
+            value: /\w+/,
+            message: 'Please provide a valid input.'
+         }
+      },
       email: {
          required: 'Please provide your email address.',
          pattern: {

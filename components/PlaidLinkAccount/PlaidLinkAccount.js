@@ -1,15 +1,10 @@
 import { useCallback, useEffect } from 'react'
 import { usePlaidLink } from 'react-plaid-link'
-import fetcher from '../../utils/fetcher'
+import { useLink } from '../../utils/useAPI'
 
 const PlaidLinkAccount = ({ item, token, update = false }) => {
-   const onSuccess = useCallback((token) => {
-      if (!update) {
-         fetcher.post('/api/get-access-token', { token })
-      } else {
-         fetcher.post('/api/update-item', { item })
-      }
-   }, [])
+   const { exchangeToken } = useLink()
+   const onSuccess = useCallback((token) => exchangeToken(token, item, update), [])
 
    const config = {
       token,

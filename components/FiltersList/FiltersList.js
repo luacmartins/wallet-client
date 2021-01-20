@@ -1,17 +1,12 @@
-import { useState, useEffect } from 'react'
-import fetcher from '../../utils/fetcher'
+import { useFilters } from '../../utils/useAPI'
 import Checkbox from '../inputs/Checkbox'
 import Card from '../shared/Card'
 import AmountPicker from '../inputs/AmountGroup'
 import DatePicker from '../inputs/DateGroup'
 
 const FiltersList = ({ value, setValue }) => {
-   const [list, setList] = useState([])
-
-   useEffect(() => {
-      fetcher.get('/api/filters')
-         .then(res => setList(res.data))
-   }, [])
+   const { getFilters } = useFilters()
+   const { list } = getFilters()
 
    const handleClick = (e, field) => {
       const filter = { ...value }

@@ -1,16 +1,10 @@
-import { useState, useEffect } from 'react'
-import fetcher from '../../utils/fetcher'
+import { useCategories } from '../../utils/useAPI'
 import Transaction from '../Transaction'
 import Card from '../shared/Card'
 
 const TransactionsList = ({ data }) => {
-   const [categories, setCategories] = useState([])
-
-   useEffect(() => {
-      fetcher.get('/api/category')
-         .then(res => setCategories(res.data))
-         .catch(e => console.log(e))
-   }, [])
+   const { getCategories } = useCategories()
+   const { categories } = getCategories()
 
    return (
       <div className="mx-4 md:mx-0 md:w-full">

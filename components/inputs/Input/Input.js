@@ -5,6 +5,7 @@ const Input = ({ type, name, pattern, placeholder, register, label, variant, cla
             className={
                `flex flex-col relative border rounded bg-white px-3 w-full font-semibold py-2
                ${variant === 'inside' ? 'h-16' : 'h-12'}
+               ${variant === 'floating' ? 'mt-2' : ''}
                ${error[name] ? 'border-red-600 text-red-600' : 'border-theme-gray-600'}
                ${className || ''}`
             }

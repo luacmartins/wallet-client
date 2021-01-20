@@ -47,9 +47,7 @@ const AccountsList = ({ data, setData }) => {
             </div>
             <div className="hidden md:sticky md:top-28 md:flex md:flex-col md:ml-4 lg:ml-8 md:flex-1 md:h-full ">
                <AddAccount />
-               <Card className="px-4 py-8 md:py-12 w-full">
-                  <EditAccount data={account} setData={setData} />
-               </Card>
+               <EditAccount data={account} setData={setData} />
             </div>
          </div>
 

@@ -1,12 +1,14 @@
 import { useState, useEffect, useRef } from 'react'
 import moment from 'moment'
 import NumberFormat from 'react-number-format'
-import fetcher from '../../utils/fetcher'
 import Modal from '../mobile/Modal'
 import EditTransaction from '../mobile/EditTransaction'
 import EditTransactionDesktop from '../desktop/EditTransaction'
+import { useTransactions } from '../../utils/useAPI'
 
 const Transaction = ({ item, className, disabled, categories, ...props }) => {
+   const { editTransaction } = useTransactions()
+
    const description = item.description.user || item.description.original
    const date = item.date.user || item.date.original
 
@@ -32,7 +34,8 @@ const Transaction = ({ item, className, disabled, categories, ...props }) => {
    }
 
    const handleSubmit = (id, payload) => {
-      fetcher.patch(`/api/transactions/${id}`, payload)
+      // fetcher.patch(`/api/transactions/${id}`, payload)
+      editTransaction(id, payload)
       setIsVisible(false)
    }
 

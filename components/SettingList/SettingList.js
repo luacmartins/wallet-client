@@ -1,23 +1,9 @@
-import fetcher from '../../utils/fetcher'
-import { useRouter } from 'next/router'
-import { Cookies } from 'react-cookie'
+import { useAuth } from '../../utils/useAPI'
 import Card from '../shared/Card'
 import ChevronRight from '../icons/ChevronRight'
 
-const cookies = new Cookies()
-
 const Settings = ({ links, setStep, ...props }) => {
-   const router = useRouter()
-
-   const handleLogout = () => {
-      fetcher.get('/api/logout')
-         .then(res => {
-            cookies.remove('token')
-            cookies.remove('user')
-            router.push('/')
-         })
-         .catch(e => console.log(e))
-   }
+   const { logout } = useAuth()
 
    return (
       <div {...props}>
@@ -32,7 +18,7 @@ const Settings = ({ links, setStep, ...props }) => {
             </div>
          </Card>
          <Card className="md:hidden w-11/12 mx-auto mt-6 hover:cursor-pointer hover:bg-theme-gray-200">
-            <div onClick={handleLogout} className="px-4 py-2">Log out</div>
+            <div onClick={logout} className="px-4 py-2">Log out</div>
          </Card>
       </div>
    );
