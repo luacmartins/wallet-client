@@ -28,6 +28,7 @@ export default function DashboardPage() {
 
    if (error) return <div>Failed to load</div>
    if (isLoading) return <Spinner />
+   if (!data) return <div>No data to show for now.</div>
    return (
       <>
          <Head>
