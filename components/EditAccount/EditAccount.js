@@ -6,10 +6,11 @@ import PlaidLinkAccount from '../PlaidLinkAccount'
 import Card from '../shared/Card'
 import Select from '../inputs/Select'
 import Button from '../shared/Button'
-import Warning from '../icons/Warning'
+import { Warning } from '../icons'
 import Alert from '../shared/Alert'
 import Input from '../inputs/Input'
-import Amount from '../inputs/Amount2'
+import Amount from '../inputs/Amount'
+
 
 const types = [
    { value: 'Cash', text: 'Cash' },

@@ -1,7 +1,6 @@
 import PlaidLinkAccount from '../PlaidLinkAccount'
 import { useLink } from '../../utils/useAPI'
-import Add from '../icons/Add'
-import AddCircle from '../icons/AddCircle'
+import { Add, AddCircle } from '../icons'
 import Button from '../shared/Button'
 
 const AddAccount = ({ type }) => {

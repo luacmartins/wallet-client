@@ -1,4 +1,4 @@
-import NumberFormat from 'react-number-format'
+import Amount from '../../inputs/Amount'
 
 const SpendTooltip = ({ payload, total, period }) => {
    let category, amount, percent, fill
@@ -12,14 +12,7 @@ const SpendTooltip = ({ payload, total, period }) => {
       <div className="w-screen md:w-80 lg:w-112 xl:w-128 flex flex-col justify-center items-center text-theme-gray-700 bg-theme-gray-100 md:text-lg lg:text-xl">
          <span className="text-sm md:text-lg lg:text-xl">You've spent</span>
          <span className="text-3xl md:text-4xl lg:text-5xl text-theme-gray-900 font-bold">
-            <NumberFormat
-               value={amount}
-               displayType={'text'}
-               thousandSeparator={true}
-               prefix={'$'}
-               fixedDecimalScale={true}
-               decimalScale={2}
-            />
+            <Amount value={amount} />
          </span>
          <div>
             <span>in </span>

@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import Amount from '../../inputs/Amount'
 import NumberFormat from 'react-number-format'
 import moment from 'moment'
 
@@ -29,14 +30,7 @@ const OvertimeTooltip = ({ coordinate: { x, y }, payload }) => {
             <div className="flex flex-col justify-center items-center w-24">
                <span className="text-sm font-normal">{moment(date).format('MMM D, YYYY')}</span>
                <div className="text-theme-gray-900 text-xl">
-                  <NumberFormat
-                     value={total}
-                     displayType={'text'}
-                     thousandSeparator={true}
-                     prefix={'$'}
-                     fixedDecimalScale={true}
-                     decimalScale={2}
-                  />
+                  <Amount value={total} />
                </div>
             </div>
             {categories && <div className="text-sm xl:text-base">
@@ -44,14 +38,7 @@ const OvertimeTooltip = ({ coordinate: { x, y }, payload }) => {
                   <div key={item.category} style={{ color: colors[item.category] }} className="flex justify-between">
                      <span className="whitespace-no-wrap truncate flex-1">{item.category}</span>
                      <span className="ml-4">
-                        <NumberFormat
-                           value={item.amount}
-                           displayType={'text'}
-                           thousandSeparator={true}
-                           prefix={'$'}
-                           fixedDecimalScale={true}
-                           decimalScale={0}
-                        />
+                        <Amount value={item.amount} />
                      </span>
                   </div>
                ))}

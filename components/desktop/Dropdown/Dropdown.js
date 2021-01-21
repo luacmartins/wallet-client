@@ -4,8 +4,7 @@ import { useRouter } from 'next/router'
 import { Cookies } from 'react-cookie'
 import { useAuth } from '../../../utils/AuthProvider'
 import Link from 'next/link'
-import ChevronDown from '../../icons/ChevronDown'
-import ChevronUp from '../../icons/ChevronUp'
+import { ChevronDown, ChevronUp } from '../../icons'
 
 const links = [
    { name: 'Settings', href: '/settings' },

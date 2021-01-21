@@ -1,8 +1,5 @@
 import ActiveLink from '../../shared/ActiveLink'
-import Home from '../../icons/Home'
-import CreditCard from '../../icons/CreditCard'
-import Transactions from '../../icons/Transactions'
-import Trends from '../../icons/Trends'
+import { Home, CreditCard, Transactions, Trends } from '../../icons'
 
 const links = [
    { name: 'Home', href: '/dashboard', icon: Home },

@@ -1,4 +1,4 @@
-import Spinner from '../../icons/Spinner'
+import { Spinner } from '../../icons'
 
 const ButtonDelete = ({ children, onClick, isLoading, className, ...props }) => {
    return (

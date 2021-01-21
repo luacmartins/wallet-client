@@ -1,5 +1,5 @@
 import Card from '../shared/Card'
-import NumberFormat from 'react-number-format'
+import Amount from '../inputs/Amount'
 
 const AccountsOverview = ({ data }) => {
    return (
@@ -9,7 +9,7 @@ const AccountsOverview = ({ data }) => {
                <div key={item.type} className="flex justify-between items-center h-12">
                   <span>{item.type.replace('_', ' ')}</span>
                   <span>
-                     <NumberFormat value={item.balance} displayType={'text'} thousandSeparator={true} prefix={'$'} decimalScale={2} fixedDecimalScale={true} />
+                     <Amount defaultValue={item.balance} />
                   </span>
                </div>
             ))}

@@ -1,6 +1,6 @@
 import { useAuth } from '../../utils/useAPI'
 import Card from '../shared/Card'
-import ChevronRight from '../icons/ChevronRight'
+import { ChevronRight } from '../icons'
 
 const Settings = ({ links, setStep, ...props }) => {
    const { logout } = useAuth()

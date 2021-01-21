@@ -1,9 +1,9 @@
 import moment from 'moment'
 import { useTransactions } from '../../utils/useAPI'
+import useOverlay from '../../utils/useOverlay'
 import Amount from '../inputs/Amount'
 import Modal from '../mobile/Modal'
 import EditTransaction from '../desktop/EditTransaction'
-import useOverlay from '../../utils/useOverlay'
 
 const Transaction = ({ item, className, disabled, categories, ...props }) => {
    const { ref, isVisible, toggle, close } = useOverlay()

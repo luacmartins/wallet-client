@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import NumberFormat from 'react-number-format'
+import Amount from '../inputs/Amount'
 import Card from '../shared/Card'
 
 const AverageSpending = ({ data }) => {
@@ -16,14 +16,7 @@ const AverageSpending = ({ data }) => {
                   <div key={item.category} className="flex justify-between py-1 px-2 lg:text-xl">
                      <span>{item.category}</span>
                      <span>
-                        <NumberFormat
-                           value={scope === 'monthly' ? item.monthly : item.yearly}
-                           displayType={'text'}
-                           thousandSeparator={true}
-                           prefix={'$'}
-                           fixedDecimalScale={2}
-                           decimalScale={2}
-                        />
+                        <Amount value={scope === 'monthly' ? item.monthly : item.yearly} />
                      </span>
                   </div>
                ))}

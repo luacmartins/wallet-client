@@ -1,11 +1,11 @@
 import moment from 'moment'
 import { useForm } from 'react-hook-form'
-import useWidth from '../../../utils/useWidth'
-import useValidation from '../../../utils/useValidation'
-import Select from '../../inputs/Select'
-import Button from '../../shared/Button'
-import Amount from '../../inputs/Amount'
-import Input from '../../inputs/Input'
+import useWidth from '../../utils/useWidth'
+import useValidation from '../../utils/useValidation'
+import Select from '../inputs/Select'
+import Button from '../shared/Button'
+import Amount from '../inputs/Amount'
+import Input from '../inputs/Input'
 
 const EditTransaction = ({ data, categories, submit }) => {
    const { register, errors, handleSubmit, formState: { isSubmitting }, control } = useForm()

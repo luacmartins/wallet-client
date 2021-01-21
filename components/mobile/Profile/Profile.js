@@ -1,6 +1,5 @@
 import { useState } from 'react'
-import User from '../../icons/User'
-import ChevronLeft from '../../icons/ChevronLeft'
+import { User, ChevronLeft } from '../../icons'
 import Modal from '../Modal'
 import SettingList from '../../SettingList'
 import ChangePassword from '../../forms/ChangePassword'

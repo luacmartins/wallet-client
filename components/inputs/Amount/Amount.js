@@ -53,6 +53,7 @@ const Amount = ({ type = 'text', name, label, variant, defaultValue, error, cont
          fixedDecimalScale={true}
          prefix={'$'}
          className={className}
+         {...props}
       />
    )
 

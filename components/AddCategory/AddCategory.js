@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react'
-import AddCircle from '../icons/AddCircle'
+import { AddCircle } from '../icons'
 
 const AddCategory = ({ subcategory = true, parent, handleAdd }) => {
    const inputEl = useRef(null)

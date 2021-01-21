@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import ActiveLink from '../../shared/ActiveLink'
-import Logo from '../../icons/Logo'
+import { Logo } from '../../icons'
 import Dropdown from '../Dropdown'
 
 const links = [

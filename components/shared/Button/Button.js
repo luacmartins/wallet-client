@@ -1,4 +1,4 @@
-import Spinner from '../../icons/Spinner'
+import { Spinner } from '../../icons'
 
 const Button = ({ children, onClick, isLoading, className, ...props }) => {
    return (
