@@ -5,6 +5,7 @@ import Card from '../shared/Card'
 const TransactionsList = ({ data }) => {
    const { getCategories } = useCategories()
    const { categories } = getCategories()
+   const list = categories.map(el => ({ text: el.name, value: el.name }))
 
    return (
       <div className="mx-4 md:mx-0 md:w-full">
@@ -25,7 +26,7 @@ const TransactionsList = ({ data }) => {
          {data.posted.length > 0 && <Card className="px-4 md:px-0 py-2 md:py-0 mt-2">
             <div className="divide-theme-gray-600 divide-y">
                {data.posted.map((item, i) => (
-                  <Transaction key={i} item={item} categories={categories} />
+                  <Transaction key={i} item={item} categories={list} />
                ))}
             </div>
          </Card>}

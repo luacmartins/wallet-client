@@ -15,7 +15,9 @@ const Input = ({ type, name, pattern, placeholder, register, label, variant, cla
                className={
                   `${variant === 'inside' ? 'text-sm px-1 ' : ''}
                   ${variant === 'floating' ? 'absolute text-sm transform -translate-y-5 bg-white px-1' : ''}
-                  ${error[name] ? 'text-red-600' : 'text-theme-gray-700'}`
+                  ${error[name] ? 'text-red-600' : 'text-theme-gray-700'}
+                  ${className || ''}`
+
                }
             >
                {label}
@@ -27,7 +29,7 @@ const Input = ({ type, name, pattern, placeholder, register, label, variant, cla
                placeholder={placeholder}
                autoComplete={'off'}
                {...props}
-               className={'h-12 px-1 outline-none font-semibold placeholder-theme-gray-700'}
+               className={`h-12 px-1 outline-none font-semibold placeholder-theme-gray-700 ${className}`}
             />
          </div>
          {error[name] && <span className='text-red-600 font-normal text-sm rounded mb-1 -mt-1'>{error[name].message}</span>}

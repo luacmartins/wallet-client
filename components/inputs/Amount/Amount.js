@@ -1,61 +1,61 @@
-import { useRef } from 'react'
 import NumberFormat from 'react-number-format'
+import { Controller } from 'react-hook-form'
 
-const Amount = ({ value, labelText, label, setValue, error, setError, display = true, background, className, ...props }) => {
-   const inputEl = useRef(null)
-
-   const handleOnChange = (e) => {
-      setValue(e.target.value)
-      if (!value) {
-         setError(false)
-      }
-   }
-
-   const handleOnBlur = () => {
-      if (!value) {
-         setError(true)
-      } else {
-         setError(false)
-      }
-   }
-
-   return (
+const Amount = ({ type = 'text', name, label, variant, defaultValue, error, control, className, ...props }) => {
+   if (type === 'input') return (
       <>
          <div
             className={
-               `flex flex-col relative border rounded h-12 bg-white px-3 w-full font-semibold 
-               ${label === 'inside' && 'h-16 py-2'}
-               ${error ? 'border-red-600 text-red-600' : 'border-theme-gray-600'}
-               ${background || ''}
-               ${className || ''} `
-            }>
+               `flex flex-col relative border rounded bg-white px-3 w-full font-semibold py-2
+               ${variant === 'inside' ? 'h-16' : 'h-12'}
+               ${variant === 'floating' ? 'mt-2' : ''}
+               ${error[name] ? 'border-red-600 text-red-600' : 'border-theme-gray-600'}
+               ${className || ''}`
+            }
+         >
             <label
+               htmlFor={name}
                className={
-                  `${label === 'inside' && 'text-sm px-1'}
-                  ${label === 'floating' && 'absolute text-sm transform -translate-y-3 bg-white px-1'}
-                  ${background || ''}
-                  ${error ? 'text-red-600' : 'text-theme-gray-700'}`
+                  `${variant === 'inside' ? 'text-sm px-1 ' : ''}
+                  ${variant === 'floating' ? 'absolute text-sm transform -translate-y-5 bg-white px-1' : ''}
+                  ${error[name] ? 'text-red-600' : 'text-theme-gray-700'}
+                  ${className || ''}`
+
                }
-               htmlFor="amount"
             >
-               {labelText}
+               {label}
             </label>
-            <NumberFormat
-               ref={inputEl}
-               name="amount"
-               value={value}
-               onChange={handleOnChange}
-               onBlur={handleOnBlur}
-               displayType={display && 'input'}
-               thousandSeparator={true}
-               decimalScale={2}
-               fixedDecimalScale={2}
-               prefix={'$'}
-               className={`h-12 px-1 outline-none font-semibold placeholder-theme-gray-700 ${background || ''}`}
-            />
+            <Controller
+               name={name}
+               control={control}
+               defaultValue={defaultValue}
+               as={
+                  <NumberFormat
+                     displayType={'input'}
+                     thousandSeparator={true}
+                     decimalScale={2}
+                     fixedDecimalScale={true}
+                     prefix={'$'}
+                     className={`h-12 px-1 outline-none font-semibold placeholder-theme-gray-700 ${className}`}
+                     {...props}
+                  />
+               } />
          </div>
       </>
-   );
+   )
+
+   return (
+      <NumberFormat
+         displayType={type}
+         defaultValue={defaultValue}
+         thousandSeparator={true}
+         decimalScale={2}
+         fixedDecimalScale={true}
+         prefix={'$'}
+         className={className}
+      />
+   )
+
 }
 
 export default Amount;

@@ -15,7 +15,8 @@ const Select = ({ name, register, label, variant, className, error, data, ...pro
                className={
                   `${variant === 'inside' ? 'text-sm px-1 ' : ''}
                   ${variant === 'floating' ? 'absolute text-sm transform -translate-y-5 bg-white px-1' : ''}
-                  ${error[name] ? 'text-red-600' : 'text-theme-gray-700'}`
+                  ${error[name] ? 'text-red-600' : 'text-theme-gray-700'}
+                  ${className || ''}`
                }
             >
                {label}
@@ -23,7 +24,7 @@ const Select = ({ name, register, label, variant, className, error, data, ...pro
             <select
                ref={register}
                name={name}
-               className={` h-12 outline-none font-semibold placeholder-theme-gray-700`}
+               className={` h-12 outline-none font-semibold placeholder-theme-gray-700 ${className}`}
                {...props}
             >
                {data.map(item => (

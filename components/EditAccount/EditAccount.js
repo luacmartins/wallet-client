@@ -49,8 +49,9 @@ const EditAccount = ({ data }) => {
             {/* Account edit form */}
             <form onSubmit={handleSubmit((payload) => editAccount(data._id, payload))} className="w-72 md:w-80 mx-auto mt-8 grid gap-y-2">
                <Input type={'text'} name={'nickname'} label={'Account nickname'} defaultValue={data.nickname || ''} variant={isMobile ? 'inside' : 'floating'} error={errors} register={register(validation.text)} />
-               <Select name={'type'} label={'Account type'} data={types} defaultValue={data.type || 'Cash'} variant={isMobile ? 'inside' : 'floating'} error={errors} register={register()} className="mt-4" />
-
+               <div className="mt-2">
+                  <Select name={'type'} label={'Account type'} data={types} defaultValue={data.type || 'Cash'} variant={isMobile ? 'inside' : 'floating'} error={errors} register={register()} />
+               </div>
                <div className="mt-8 flex justify-center">
                   <Button isLoading={isSubmitting} >Done</Button>
                </div>
