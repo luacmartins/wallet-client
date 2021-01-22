@@ -1,14 +1,8 @@
-import { useState, useEffect } from 'react'
-import { useAuth } from '../../../utils/AuthProvider'
+import { useAuth } from '../../../utils/useAPI'
 import Amount from '../../inputs/Amount'
 
 const NetWorthIntro = ({ data }) => {
-   const { user } = useAuth()
-   const [username, setUsername] = useState('')
-
-   useEffect(() => {
-      setUsername(user)
-   }, [user])
+   const { username } = useAuth()
 
    return (
       <div className="flex flex-col items-center">
