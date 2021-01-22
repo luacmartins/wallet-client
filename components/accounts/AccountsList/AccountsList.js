@@ -1,13 +1,17 @@
 import { useState, useEffect } from 'react'
-import { EditAccount, AddAccount } from '../../accounts'
+import { EditAccount, AddAccount, DeleteAccount } from '../../accounts'
+import { useAccounts } from '../../../utils/useAPI'
 import { Warning } from '../../icons'
 import { Amount } from '../../inputs'
 import { Card, Modal } from '../../shared'
+import useOverlay from '../../../utils/useOverlay'
 
 const AccountsList = ({ data, setData }) => {
-   const [isVisible, setIsVisible] = useState(false)
+   const [isModalVisible, setIsModalVisible] = useState(false)
    const [account, setAccount] = useState('')
    const [active, setActive] = useState('')
+   const { ref, isVisible, open, close } = useOverlay()
+   const { deleteAccount } = useAccounts()
 
    useEffect(() => {
       const initialState = Object.keys(data).length > 0 && data[Object.keys(data)[0]][0] || ''
@@ -17,7 +21,7 @@ const AccountsList = ({ data, setData }) => {
 
 
    const handleClick = (accountData) => {
-      setIsVisible(true)
+      setIsModalVisible(true)
       setActive(accountData._id)
       setAccount(accountData)
    }
@@ -45,18 +49,22 @@ const AccountsList = ({ data, setData }) => {
             </div>
             <div className="hidden md:sticky md:top-28 md:flex md:flex-col md:ml-4 lg:ml-8 md:flex-1 md:h-full ">
                <AddAccount />
-               <EditAccount data={account} setData={setData} />
+               <EditAccount data={account} open={open} />
             </div>
          </div>
 
+         {/* Delete confirmation modal */}
+         {isVisible && <DeleteAccount reference={ref} close={close} deleteAccount={() => deleteAccount(active)} />}
+
          <Modal
-            isVisible={isVisible}
-            setIsVisible={setIsVisible}
+            isVisible={isModalVisible}
+            setIsVisible={setIsModalVisible}
             title={'Accounts'}
          >
             {account &&
                <div className="mx-8 mt-6">
-                  <EditAccount data={account} setData={setData} />
+                  <EditAccount data={account} open={open} />
+                  {isVisible && <DeleteAccount reference={ref} close={close} deleteAccount={() => deleteAccount(active)} />}
                </div>}
          </Modal>
       </>

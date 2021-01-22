@@ -15,10 +15,10 @@ const types = [
    { value: 'Other_assets', text: 'Other asset' }
 ]
 
-const EditAccount = ({ data }) => {
+const EditAccount = ({ data, open }) => {
    const { register, errors, handleSubmit, formState: { isSubmitting } } = useForm()
    const validation = useValidation()
-   const { alert, editAccount, deleteAccount } = useAccounts()
+   const { alert, editAccount } = useAccounts()
    const { token, updateItem } = useLink()
    const isMobile = useWidth() < 768 ? true : false
 
@@ -54,7 +54,7 @@ const EditAccount = ({ data }) => {
 
                {/* Delete account */}
                <div className="mt-16 flex flex-col items-center">
-                  <button type={'button'} onClick={() => deleteAccount(data._id)} className="text-red-600 underline font-semibold hover:text-red-700">Delete account</button>
+                  <button type={'button'} onClick={open} className="text-red-600 underline font-semibold hover:text-red-700">Delete account</button>
                   <span className="font-light text-sm text-center">All accounts from this institution will be affected.</span>
                </div>
             </form>
