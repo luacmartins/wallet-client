@@ -35,8 +35,8 @@ export default function TransactionsPage() {
                         <Search value={filters} setValue={setFilters} />
                         {hasFilters && <ResetFilters setValue={setFilters} />}
                      </div>
-                     <div className="flex md:gap-x-10 lg:gap-x-12">
-                        <div className="hidden md:flex md:flex-col gap-y-6 md:w-64">
+                     <div className="flex md:space-x-10 lg:space-x-12">
+                        <div className="hidden md:flex md:flex-col space-y-6 md:w-64">
                            <Search value={filters} setValue={setFilters} />
                            <FiltersList value={filters} setValue={setFilters} />
                         </div>

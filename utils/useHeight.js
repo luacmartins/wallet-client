@@ -5,7 +5,7 @@ const useHeight = (offset) => {
    useEffect(() => {
       const getHeight = () => {
          let $height = window.innerHeight
-         if ($height < 813) setHeight($height - offset)
+         if ($height < 900) setHeight($height - offset)
          else setHeight(600)
       }
       getHeight()

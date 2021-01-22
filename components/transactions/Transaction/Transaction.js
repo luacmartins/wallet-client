@@ -25,7 +25,7 @@ const Transaction = ({ item, className, disabled, categories, ...props }) => {
                <span className="capitalize truncate">{item.description.user.toLowerCase()}</span>
                <span className="font-normal text-theme-gray-700 text-xs md:text-sm">{item.category}</span>
             </div>
-            <Amount defaultValue={item.amount} className="text-right md:font-bold md:text-lg w-24" />
+            <Amount defaultValue={item.amount} className="text-right md:font-bold md:text-lg" />
          </div>
          {isVisible && !disabled && <EditTransaction data={item} categories={categories} submit={submit} />}
          {!disabled && <Modal
