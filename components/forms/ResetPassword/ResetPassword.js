@@ -2,8 +2,7 @@ import Logo from '../../icons/Logo'
 import { useForm } from 'react-hook-form'
 import { useAuth } from '../../../utils/useAPI'
 import useValidation from '../../../utils/useValidation'
-import Button from '../../shared/Button'
-import Alert from '../../shared/Alert'
+import { Button, Alert } from '../../shared'
 
 const ResetPassword = () => {
    const { register, errors, handleSubmit, getValues, formState: { isSubmitting } } = useForm()

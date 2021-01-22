@@ -1,21 +1,19 @@
-import Add from './Add'
-import AddCircle from './AddCircle'
-import Check from './Check'
-import ChevronDown from './ChevronDown'
-import ChevronLeft from './ChevronLeft'
-import ChevronRight from './ChevronRight'
-import ChevronUp from './ChevronUp'
-import Close from './Close'
-import CloseCircle from './CloseCircle'
-import Filter from './Filter'
-import Logo from './Logo'
-import Loupe from './Loupe'
-import Spinner from './Spinner'
-import User from './User'
-import Warning from './Warning'
-import Home from './Home'
-import Transactions from './Transactions'
-import Trends from './Trends'
-import CreditCard from './CreditCard'
-
-export { Add, AddCircle, Home, Transactions, Trends, CreditCard, Check, ChevronDown, ChevronRight, ChevronLeft, ChevronUp, Close, CloseCircle, Filter, Logo, Loupe, Spinner, User, Warning }
+export { default as Add } from './Add';
+export { default as AddCircle } from './AddCircle';
+export { default as Check } from './Check';
+export { default as ChevronDown } from './ChevronDown';
+export { default as ChevronLeft } from './ChevronLeft';
+export { default as ChevronRight } from './ChevronRight';
+export { default as ChevronUp } from './ChevronUp';
+export { default as Close } from './Close';
+export { default as CloseCircle } from './CloseCircle';
+export { default as CreditCard } from './CreditCard';
+export { default as Filter } from './Filter';
+export { default as Home } from './Home';
+export { default as Logo } from './Logo';
+export { default as Loupe } from './Loupe';
+export { default as Spinner } from './Spinner';
+export { default as Transactions } from './Transactions';
+export { default as Trends } from './Trends';
+export { default as User } from './User';
+export { default as Warning } from './Warning';

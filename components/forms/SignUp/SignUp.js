@@ -3,8 +3,7 @@ import { useForm } from 'react-hook-form'
 import { useAuth } from '../../../utils/useAPI'
 import useValidation from '../../../utils/useValidation'
 import { Logo } from '../../icons'
-import Button from '../../shared/Button'
-import Alert from '../../shared/Alert'
+import { Button, Alert } from '../../shared'
 import Input from '../../inputs/Input'
 
 const SignUp = () => {

@@ -1,6 +1,6 @@
 import Head from 'next/head'
-import Layout from '../components/shared/Layout'
-import Login from '../components/forms/Login'
+import { Layout } from '../components/shared'
+import { Login } from '../components/forms'
 
 export default function Index() {
    return (

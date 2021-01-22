@@ -1,14 +1,8 @@
-import { useState } from 'react'
 import Head from 'next/head'
+import { useState } from 'react'
 import { useData } from '../utils/useAPI'
-import Layout from '../components/shared/Layout'
-import NavBar from '../components/desktop/NavBar'
-import MobileHeader from '../components/mobile/Header'
-import MobileNavBar from '../components/mobile/NavBar'
-import AccountsList from '../components/AccountsList'
-import Footer from '../components/desktop/Footer'
-import AddAccount from '../components/AddAccount'
-import Suspense from '../components/shared/Suspense'
+import { AddAccount, AccountsList } from '../components/accounts'
+import { NavBar, MobileHeader, MobileNavBar, Footer, Suspense, Layout } from '../components/shared'
 
 export default function AccountsPage() {
    const [edit, setEdit] = useState('')

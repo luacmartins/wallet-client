@@ -3,9 +3,8 @@ import { useForm } from 'react-hook-form'
 import { useAuth } from '../../../utils/useAPI'
 import useValidation from '../../../utils/useValidation'
 import { Logo } from '../../icons'
-import Button from '../../shared/Button'
+import { Button, Alert } from '../../shared'
 import Input from '../../inputs/Input'
-import Alert from '../../shared/Alert'
 
 const Login = () => {
    const { register, errors, handleSubmit, formState: { isSubmitting } } = useForm()
@@ -23,7 +22,7 @@ const Login = () => {
             <Alert data={alert} />
             <Input type={'email'} name={'email'} placeholder={'Email'} error={errors} register={register(validation.email)} />
             <Input type={'password'} name={'password'} placeholder={'Password'} error={errors} register={register(validation.password)} />
-            <Link href="/forgot-password">
+            <Link href="/user/forgot-password">
                <a className="font-thin text-sm underline">Forgot your password?</a>
             </Link>
             <Button className="block mt-4 mx-auto" isLoading={isSubmitting} type={'submit'}>Login</Button>
@@ -31,7 +30,7 @@ const Login = () => {
 
          <div className="text-center mt-8">
             <span className="font-thin">Don't have an account?</span>
-            <Link href="/sign-up">
+            <Link href="/user/sign-up">
                <a className="text-theme-yellow-500 underline ml-1 hover:text-theme-yellow-700">Sign up</a>
             </Link>
             <span className="font-thin block my-2">or</span>

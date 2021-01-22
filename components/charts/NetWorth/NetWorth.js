@@ -1,4 +1,4 @@
-import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
+import { AreaChart, Area, YAxis, Tooltip, ResponsiveContainer } from 'recharts'
 import YTicks from '../YTicks'
 import CustomTooltip from '../Tooltip'
 
@@ -64,7 +64,6 @@ const NetWorth = ({ data }) => {
                />
             </AreaChart>
          </ResponsiveContainer>
-
       </>
    );
 }

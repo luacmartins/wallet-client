@@ -1,5 +1,5 @@
 import Spinner from '../Spinner'
-import AddAccount from '../../AddAccount'
+import { AddAccount } from '../../accounts'
 
 const Suspense = ({ error, isLoading }) => {
    if (error) return (

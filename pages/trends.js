@@ -1,20 +1,9 @@
+import Head from 'next/head'
 import { useState } from 'react'
 import { useData } from '../utils/useAPI'
-import Head from 'next/head'
-import Layout from '../components/shared/Layout'
-import NavBar from '../components/desktop/NavBar'
-import MobileHeader from '../components/mobile/Header'
-import MobileNavBar from '../components/mobile/NavBar'
-import MonthlySpendChart from '../components/charts/MonthlySpend'
-import Footer from '../components/desktop/Footer'
-import Timeframe from '../components/charts/Timeframe'
-import MonthlySpendIntro from '../components/MonthlySpendIntro'
-import AverageSpending from '../components/AverageSpending'
-import OvertimeSpending from '../components/charts/OvertimeSpending'
-import OvertimeIntro from '../components/OvertimeIntro'
-import Suspense from '../components/shared/Suspense'
-
 import useHeight from '../utils/useHeight'
+import { MonthlySpend, Timeframe, MonthlySpendIntro, AverageSpending, OvertimeSpending, OvertimeIntro } from '../components/charts'
+import { Layout, NavBar, MobileHeader, MobileNavBar, Footer, Suspense } from '../components/shared'
 
 const colors = ['#fab131', '#5FB2FF', '#4462FF', '#FF7777', '#19B200', '#B900BD']
 
@@ -56,7 +45,7 @@ export default function TrendsPage() {
                         <div
                            style={{ height }}
                            className="w-screen md:w-full md:chart-h-80 lg:chart-h-96 xl:chart-h-112">
-                           <MonthlySpendChart colors={colors} data={data.monthly.series} period={monthlyPeriod} />
+                           <MonthlySpend colors={colors} data={data.monthly.series} period={monthlyPeriod} />
                         </div>
                         <Timeframe data={data.monthly.timeframe} period={monthlyPeriod} setPeriod={setMonthlyPeriod} />
                      </div>

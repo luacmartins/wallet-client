@@ -6,7 +6,7 @@ const useOverlay = () => {
 
    useEffect(() => {
       const handleClickOutside = (e) => {
-         if (ref && !ref.current.contains(e.target)) {
+         if (ref && !ref.current?.contains(e.target)) {
             setIsVisible(false)
          }
       }
@@ -21,11 +21,15 @@ const useOverlay = () => {
       setIsVisible(false)
    }
 
+   const open = () => {
+      setIsVisible(true)
+   }
+
    const toggle = () => {
       setIsVisible(!isVisible)
    }
 
-   return { ref, isVisible, close, toggle }
+   return { ref, isVisible, close, open, toggle }
 }
 
 export default useOverlay

@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
-import Amount from '../../inputs/Amount'
-import NumberFormat from 'react-number-format'
 import moment from 'moment'
+import Amount from '../../inputs/Amount'
+
 
 const OvertimeTooltip = ({ coordinate: { x, y }, payload }) => {
    const [pos, setPos] = useState(null)

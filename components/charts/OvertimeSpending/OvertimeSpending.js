@@ -1,6 +1,5 @@
-import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
-import YTicks from '../YTicks'
-import OvertimeTooltip from '../OvertimeTooltip'
+import { AreaChart, Area, YAxis, Tooltip, ResponsiveContainer } from 'recharts';
+import {YTicks, OvertimeTooltip} from '../../charts'
 
 const OvertimeSpending = ({ colors, data }) => {
    const { categories, series } = data
