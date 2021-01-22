@@ -12,7 +12,7 @@ const YTicks = ({ x, y, payload }) => {
       >
          <div
             xmlns='http://www.w3.org/1999/xhtml'
-            className="absolute right-0 bg-white opacity-75 font-thin rounded-full text-center
+            className="fixed right-0 bg-white opacity-75 font-thin rounded-full text-center
                   px-1 py-1 text-sm w-16
                   md:w-24  md:px-4 md:font-semibold ">
             {
