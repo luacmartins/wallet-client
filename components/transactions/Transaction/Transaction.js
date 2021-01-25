@@ -1,22 +1,20 @@
+import { useRef } from 'react'
 import moment from 'moment'
 import { useTransactions } from '../../../utils/useAPI'
-import useOverlay from '../../../utils/useOverlay'
+import useOverlay, { useClickOutside } from '../../../utils/useOverlay'
 import Amount from '../../inputs/Amount'
 import Modal from '../../shared/Modal'
 import EditTransaction from '../EditTransaction'
 
 const Transaction = ({ item, className, disabled, categories, ...props }) => {
-   const { ref, isVisible, toggle, close } = useOverlay()
+   const ref = useRef(null)
+   const { isVisible, toggle, close } = useOverlay()
+   const isDropdownVisible = useClickOutside(ref)
    const { editTransaction } = useTransactions()
 
-   const submit = (id, data) => {
-      editTransaction(id, data)
-      close()
-   }
-
    return (
-      <div ref={ref}>
-         <div onClick={toggle} className={`flex py-2 items-center md:px-2 md:py-4 ${className || ''} ${!disabled && 'cursor-pointer md:py-4 md:px-6'}`} {...props}>
+      <>
+         <div ref={ref} onClick={toggle} className={`flex py-2 items-center md:px-2 md:py-4 ${className || ''} ${!disabled && 'cursor-pointer md:py-4 md:px-6'}`} {...props}>
             <div className="flex flex-col w-8 items-center leading-tight mr-2">
                <span className="md:text-lg">{moment(item.date.user, 'YYYYMMDD').format('D')}</span>
                <span className="text-xs font-normal md:text-base">{moment(item.date.user, 'YYYYMMDD').format('MMM')}</span>
@@ -27,17 +25,18 @@ const Transaction = ({ item, className, disabled, categories, ...props }) => {
             </div>
             <Amount defaultValue={item.amount} className="text-right md:font-bold md:text-lg" />
          </div>
-         {isVisible && !disabled && <EditTransaction data={item} categories={categories} submit={submit} />}
+         {isDropdownVisible && !disabled && <EditTransaction data={item} categories={categories} submit={editTransaction} />}
+
          {!disabled && <Modal
             isVisible={isVisible}
-            setIsVisible={close}
+            close={close}
             title={'Transactions'}
          >
             <div className="mx-4 mt-10 mb-12">
-               <EditTransaction data={item} categories={categories} submit={submit} />
+               <EditTransaction data={item} categories={categories} submit={editTransaction} />
             </div>
          </Modal>}
-      </div>
+      </>
    );
 }
 

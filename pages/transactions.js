@@ -1,6 +1,7 @@
 import Head from 'next/head'
 import { useState } from 'react'
 import { useData } from '../utils/useAPI'
+import useOverlay from '../utils/useOverlay'
 import { TransactionsList, ResetFilters, FiltersList, FilterModal } from '../components/transactions'
 import { Layout, NavBar, MobileHeader, MobileNavBar, Footer, Pagination, Suspense } from '../components/shared'
 import { Search } from '../components/inputs'

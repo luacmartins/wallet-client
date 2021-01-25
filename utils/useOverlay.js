@@ -1,22 +1,9 @@
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect } from 'react'
+import useWidth from './useWidth'
 
-const useOverlay = () => {
+export default function useOverlay() {
    const [isVisible, setIsVisible] = useState(false)
-   const ref = useRef(null)
-
-   useEffect(() => {
-      const handleClickOutside = (e) => {
-         if (ref && !ref.current?.contains(e.target)) {
-            setIsVisible(false)
-            document.getElementsByTagName('body')[0].classList.remove('overflow-hidden')
-         }
-      }
-      document.addEventListener('mousedown', handleClickOutside)
-
-      return () => {
-         document.removeEventListener('mousedown', handleClickOutside)
-      }
-   }, [])
+   const isMobile = useWidth() < 768
 
    const close = () => {
       setIsVisible(false)
@@ -28,12 +15,36 @@ const useOverlay = () => {
       document.getElementsByTagName('body')[0].classList.add('overflow-hidden')
    }
 
-   const toggle = () => {
-      setIsVisible(!isVisible)
-      document.getElementsByTagName('body')[0].classList.toggle('overflow-hidden')
+   const closeOverlay = () => {
+      setIsVisible(false)
    }
 
-   return { ref, isVisible, close, open, toggle }
+   const toggle = () => {
+      setIsVisible(!isVisible)
+      isMobile && document.getElementsByTagName('body')[0].classList.toggle('overflow-hidden')
+   }
+
+   return { isVisible, close, closeOverlay, open, toggle }
 }
 
-export default useOverlay
+export const useClickOutside = (ref, keep) => {
+   const [isVisible, setIsVisible] = useState(false)
+
+   const handleClick = (e) => {
+      if (ref?.current?.contains(e.target)) {
+         keep ? setIsVisible(true) : setIsVisible(!isVisible)
+      } else {
+         setIsVisible(false)
+      }
+   }
+
+   useEffect(() => {
+      document.addEventListener('mousedown', handleClick)
+
+      return () => {
+         document.removeEventListener('mousedown', handleClick)
+      }
+   })
+
+   return isVisible
+}

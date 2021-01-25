@@ -3,26 +3,27 @@ import { User, ChevronLeft } from '../../icons'
 import { Modal, SettingList } from '../../shared'
 import ChangePassword from '../../forms/ChangePassword'
 import { Categories } from '../../categories'
+import useOverlay from '../../../utils/useOverlay'
 
 const links = [
    { name: 'Change password', step: 'Password' },
    { name: 'Categories', step: 'Categories' }
 ]
 const Profile = () => {
-   const [isVisible, setIsVisible] = useState(false)
    const [step, setStep] = useState('')
+   const { isVisible, open, close } = useOverlay()
 
    const handleClose = () => {
-      setIsVisible(false)
+      close()
       setStep('')
    }
 
    return (
       <>
-         <User className='hover:cursor-pointer' onClick={() => setIsVisible(true)} />
+         <User className='hover:cursor-pointer' onClick={open} />
          <Modal
             isVisible={isVisible}
-            setIsVisible={handleClose}
+            close={handleClose}
             title={`Profile ${step && `- ${step}`}`}
             left={step && <ChevronLeft onClick={() => setStep('')} />}
          >

@@ -19,10 +19,10 @@ const EditTransaction = ({ data, categories, submit }) => {
 
             {/* Header for mobile only */}
             <div className="md:hidden flex flex-col items-center">
-               <span className="text-sm text-theme-gray-700 font-normal">{data.account}</span>
+               <span className="text-sm text-theme-gray-700 font-normal text-center">{data.account}</span>
                <Amount defaultValue={data.amount} className="bg-transparent text-center text-4xl font-semibold w-full my-2" />
-               <span className="capitalize">{data.description.user.toLowerCase()}</span>
-               <span className="font-normal text-sm">{date}</span>
+               <span className="capitalize text-center">{data.description.user.toLowerCase()}</span>
+               <span className="font-normal text-sm">{moment(data.date.user).format('MMM D, YYYY')}</span>
             </div>
 
             <form onSubmit={handleSubmit((form) => submit(data._id, form))} className="flex flex-col gap-y-2 w-full mt-8 md:mt-0 md:grid md:grid-cols-5 md:grid-rows-2 lg:grid-cols-4 md:gap-4 ">

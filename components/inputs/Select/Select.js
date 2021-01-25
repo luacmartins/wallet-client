@@ -23,11 +23,16 @@ const Select = ({ name, register, label, variant, className, error, data, ...pro
             >
                {label}
             </label>
-            <ChevronDown className="h-4 w-4 absolute right-0 mr-3 mt-2" />
+            <ChevronDown
+               className={
+                  `h-4 w-4 absolute right-0 mr-3
+                  ${variant === 'inside' ? 'mt-6' : 'mt-2'}`
+               }
+            />
             <select
                ref={register}
                name={name}
-               className={`h-12 outline-none font-semibold placeholder-theme-gray-700 appearance-none ${className}`}
+               className={`h-12 px-1 outline-none font-semibold placeholder-theme-gray-700 appearance-none ${className}`}
                {...props}
             >
 

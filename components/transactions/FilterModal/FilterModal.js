@@ -2,20 +2,17 @@ import { useState } from 'react'
 import FilterIcon from '../../icons/Filter'
 import Modal from '../../shared/Modal'
 import FiltersList from '../FiltersList'
+import useOverlay from '../../../utils/useOverlay'
 
 const FilterModal = ({ value, setValue }) => {
-   const [isVisible, setIsVisible] = useState(false)
-
-   const handleClose = () => {
-      setIsVisible(false)
-   }
+   const { isVisible, open, close } = useOverlay()
 
    return (
       <>
-         <FilterIcon onClick={() => setIsVisible(true)} />
+         <FilterIcon onClick={open} />
          <Modal
             isVisible={isVisible}
-            setIsVisible={handleClose}
+            close={close}
             title={'Filters'}
          >
             <div className="mx-4 mt-4 mb-12">
