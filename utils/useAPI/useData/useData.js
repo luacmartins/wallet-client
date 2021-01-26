@@ -12,7 +12,6 @@ const useData = (endpoint, params) => {
    }
 
    const { data, error } = useSWR(url, swrFetcher)
-
    return {
       data: data?.data,
       totalPages: parseInt(data?.totalPages),

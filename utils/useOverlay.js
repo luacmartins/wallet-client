@@ -27,12 +27,18 @@ export default function useOverlay() {
    return { isVisible, close, closeOverlay, open, toggle }
 }
 
-export const useClickOutside = (ref, keep) => {
+export const useClickOutside = (ref, dropdown) => {
    const [isVisible, setIsVisible] = useState(false)
 
    const handleClick = (e) => {
-      if (ref?.current?.contains(e.target)) {
-         keep ? setIsVisible(true) : setIsVisible(!isVisible)
+      // if (dropdown?.current?.contains(e.target)) return
+
+      if (dropdown?.current?.contains(e.target)) {
+         setIsVisible(true)
+      } else if (dropdown && ref?.current?.contains(e.target) && !dropdown?.current?.contains(e.target)) {
+         setIsVisible(!isVisible)
+      } else if (!dropdown && ref?.current?.contains(e.target)) {
+         setIsVisible(true)
       } else {
          setIsVisible(false)
       }

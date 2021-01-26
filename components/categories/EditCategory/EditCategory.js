@@ -5,7 +5,7 @@ import DeleteCategory from '../DeleteCategory'
 
 const EditCategory = ({ category, parent, handleEdit, handleDelete, isMobile }) => {
    const ref = useRef(null)
-   const isEditing = useClickOutside(ref, true)
+   const isEditing = useClickOutside(ref)
    const { isVisible, open, close, closeOverlay } = useOverlay()
    const [name, setName] = useState(category.name)
 
@@ -17,7 +17,7 @@ const EditCategory = ({ category, parent, handleEdit, handleDelete, isMobile }) 
    const handleDeleteCategory = () => {
       handleDelete(category._id)
       close()
-      setIsEditing(false)
+      closeOverlay()
    }
 
    return (

@@ -1,11 +1,8 @@
-import { useCategories } from '../../../utils/useAPI'
 import Transaction from '../Transaction'
 import Card from '../../shared/Card'
 
-const TransactionsList = ({ data }) => {
-   const { getCategories } = useCategories()
-   const { categories } = getCategories()
-   const list = categories.map(el => ({ text: el.name, value: el.name }))
+const TransactionsList = ({ data, categories, params }) => {
+   const list = categories?.map(el => ({ text: el.name, value: el.name }))
 
    return (
       <div className="mx-4 md:mx-0 md:w-full">
@@ -15,7 +12,7 @@ const TransactionsList = ({ data }) => {
             <div className="divide-theme-gray-600 divide-y opacity-50">
                {data.pending.length === 0 && <div className="font-normal">No pending transactions.</div>}
                {data.pending.length > 0 && data.pending.map((item, i) => (
-                  <Transaction key={i} item={item} disabled />
+                  <Transaction key={i} item={item} params={params} disabled />
                ))}
             </div>
          </div>
@@ -26,7 +23,7 @@ const TransactionsList = ({ data }) => {
          {data.posted.length > 0 && <Card className="px-4 md:px-0 py-2 md:py-0 mt-2">
             <div className="divide-theme-gray-600 divide-y">
                {data.posted.map((item, i) => (
-                  <Transaction key={i} item={item} categories={list} />
+                  <Transaction key={i} item={item} params={params} categories={list} />
                ))}
             </div>
          </Card>}

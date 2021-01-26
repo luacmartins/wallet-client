@@ -6,11 +6,12 @@ import Amount from '../../inputs/Amount'
 import Modal from '../../shared/Modal'
 import EditTransaction from '../EditTransaction'
 
-const Transaction = ({ item, className, disabled, categories, ...props }) => {
+const Transaction = ({ item, className, disabled, categories, params, ...props }) => {
    const ref = useRef(null)
+   const dropdown = useRef(null)
    const { isVisible, toggle, close } = useOverlay()
-   const isDropdownVisible = useClickOutside(ref)
-   const { editTransaction } = useTransactions()
+   const isDropdownVisible = useClickOutside(ref, dropdown)
+   const { editTransaction } = useTransactions(params)
 
    return (
       <>
@@ -25,7 +26,12 @@ const Transaction = ({ item, className, disabled, categories, ...props }) => {
             </div>
             <Amount defaultValue={item.amount} className="text-right md:font-bold md:text-lg" />
          </div>
-         {isDropdownVisible && !disabled && <EditTransaction data={item} categories={categories} submit={editTransaction} />}
+
+         {isDropdownVisible && !disabled &&
+            <div ref={dropdown} className="border-none" >
+               <EditTransaction data={item} categories={categories} submit={editTransaction} />
+            </div>
+         }
 
          {!disabled && <Modal
             isVisible={isVisible}

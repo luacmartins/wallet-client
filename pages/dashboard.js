@@ -11,7 +11,9 @@ import { Layout, NavBar, MobileNavBar, MobileHeader, MobileProfile, Suspense, Fo
 
 export default function DashboardPage() {
    const [period, setPeriod] = useState('3M')
-   const { data, isLoading, error } = useData('/api/dashboard', { period })
+   const { data, isLoading: isLoadingData, error } = useData('/api/dashboard', { period })
+   const { data: categories, isLoading: isLoadingCategories } = useData('/api/category')
+   const isLoading = isLoadingData || isLoadingCategories
    const hasNoData = !data || (data && Object.keys(data).length === 0)
 
    // 282 is the height offset of the other elements on the screen (header, navbar, etc)
@@ -40,7 +42,7 @@ export default function DashboardPage() {
                   <Timeframe data={data.networth.timeframe} period={period} setPeriod={setPeriod} />
                   <div className="mt-12 md:flex md:w-180 lg:w-240 md:mx-auto md:mt-16">
                      <div className="hidden md:flex md:flex-1">
-                        <TransactionsList data={data.transactions} />
+                        <TransactionsList data={data.transactions} categories={categories} />
                      </div>
                      <div className="md:w-80 lg:w-96 md:ml-8">
                         <AccountsOverview data={data.accounts} />

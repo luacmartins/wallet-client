@@ -1,11 +1,7 @@
-import { useFilters } from '../../../utils/useAPI'
 import { Checkbox, AmountGroup, DateGroup } from '../../inputs'
 import Card from '../../shared/Card'
 
-const FiltersList = ({ value, setValue }) => {
-   const { getFilters } = useFilters()
-   const { list } = getFilters()
-
+const FiltersList = ({ list, value, setValue }) => {
    const handleClick = (e, field) => {
       const filter = { ...value }
 
@@ -49,7 +45,7 @@ const FiltersList = ({ value, setValue }) => {
             <AmountGroup value={value} setValue={setValue} />
          </div>
 
-         {list.map((item, i) => (
+         {list?.map((item, i) => (
             <div key={item.name}>
                <header className="text-sm">{item.name}</header>
                <Card className="divide-y divide-theme-gray-600 mt-2 mb-6">

@@ -1,14 +1,14 @@
 import { Cookies } from 'react-cookie'
 import axios from 'axios'
 
-const config = (config) => {
+const getHeaders = (req) => {
    const cookies = new Cookies()
 
    const token = cookies.get('token');
    if (token) {
-      config.headers['Authorization'] = token;
+      req.headers['Authorization'] = token;
    }
-   return config;
+   return req;
 }
 
 const error = (error) => {
@@ -16,7 +16,7 @@ const error = (error) => {
 }
 
 const fetcher = axios.create({ baseURL: `${process.env.NEXT_PUBLIC_SERVER_URL}` })
-fetcher.interceptors.request.use((params) => config(params), (e) => error(e))
+fetcher.interceptors.request.use(req => getHeaders(req), (e) => error(e))
 
 const swrFetcher = url => fetcher.get(url).then(res => {
    const data = {

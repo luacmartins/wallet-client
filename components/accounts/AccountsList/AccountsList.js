@@ -20,13 +20,19 @@ const AccountsList = ({ data }) => {
    useEffect(() => {
       const initialState = Object.keys(data).length > 0 && data[Object.keys(data)[0]][0] || ''
       setAccount(initialState)
-      setActive(initialState._id)
+      setActive(initialState)
    }, [data])
 
    const handleClick = (accountData, isMobile) => {
-      setActive(accountData._id)
+      setActive(accountData)
       setAccount(accountData)
       if (isMobile) openModal()
+   }
+
+   const handleDelete = (account) => {
+      closeOverlay()
+      close()
+      deleteAccount(active)
    }
 
    return (
@@ -36,8 +42,8 @@ const AccountsList = ({ data }) => {
                {Object.keys(data).map((key, i) => (
                   <div key={i} className="mx-4 mb-8">
                      <header className="text-xl mb-2">{key.replace('_', ' ')}</header>
-                     {data[key].map((account) => (
-                        <Card key={account._id} onClick={() => handleClick(account, isMobile)} className={`${account._id === active ? 'md:border md:border-theme-gray-700' : 'hover:border-theme-gray-200 hover:bg-theme-gray-200'} py-1 mb-2 cursor-pointer border border-white`}>
+                     {data[key].map(account => (
+                        <Card key={account._id} onClick={() => handleClick(account, isMobile)} className={`${account._id === active._id ? 'md:border md:border-theme-gray-700' : 'hover:border-theme-gray-200 hover:bg-theme-gray-200'} py-1 mb-2 cursor-pointer border border-white`}>
                            <div className="flex items-center h-12 px-6">
                               <span className="flex-1 whitespace-no-wrap truncate mr-4">{account.nickname}</span>
                               <span>
@@ -59,7 +65,7 @@ const AccountsList = ({ data }) => {
          </div>
 
          {/* Delete confirmation modal */}
-         {isVisible && <DeleteAccount close={close} deleteAccount={() => deleteAccount(active)} />}
+         {isVisible && <DeleteAccount close={close} deleteAccount={() => handleDelete(active)} />}
 
          <Modal
             isVisible={isModalVisible}
@@ -69,7 +75,7 @@ const AccountsList = ({ data }) => {
             {account &&
                <div className="mx-8 mt-6">
                   <EditAccount data={account} open={open} />
-                  {isVisible && <DeleteAccount close={closeOverlay} deleteAccount={() => deleteAccount(active)} />}
+                  {isVisible && <DeleteAccount close={closeOverlay} deleteAccount={() => handleDelete(active)} />}
                </div>}
          </Modal>
       </>

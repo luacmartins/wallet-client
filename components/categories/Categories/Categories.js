@@ -1,13 +1,12 @@
-import { useCategories } from '../../../utils/useAPI'
+import { useData, useCategories } from '../../../utils/useAPI'
 import { AddCategory, EditCategory } from '../../categories'
 import { Alert, Card, Spinner } from '../../shared'
 import useWidth from '../../../utils/useWidth'
 
 const Categories = () => {
-   const { alert, getCategories, addCategory, editCategory, deleteCategory } = useCategories()
-   const { categories, isLoading } = getCategories()
+   const { alert, addCategory, editCategory, deleteCategory } = useCategories()
+   const { data, isLoading } = useData('/api/category')
    const isMobile = useWidth() < 768
-
 
    if (isLoading) return <Spinner />
    return (
@@ -16,8 +15,8 @@ const Categories = () => {
 
          <Card className="w-11/12 sm:w-full mx-auto sm:mx-0 mt-2 mb-6 py-2">
             <div className="divide-theme-gray-600 divide-y">
-               {categories.map(category => (
-                  <div key={category._id} className="flex flex-col">
+               {data.map(category => (
+                  <div key={category.name} className="flex flex-col">
                      <EditCategory category={category} handleEdit={editCategory} handleDelete={deleteCategory} isMobile={isMobile} />
                   </div>
                ))}
