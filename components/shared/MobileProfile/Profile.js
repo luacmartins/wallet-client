@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { User, ChevronLeft } from '../../icons'
 import { Modal, SettingList } from '../../shared'
 import ChangePassword from '../../forms/ChangePassword'
-import { Categories } from '../../categories'
+import Categories from '../../categories/Categories'
 import useOverlay from '../../../utils/useOverlay'
 
 const links = [
