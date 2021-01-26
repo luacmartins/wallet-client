@@ -1,5 +1,6 @@
 import { useData, useCategories } from '../../../utils/useAPI'
-import { AddCategory, EditCategory } from '../../categories'
+import AddCategory from '../AddCategory'
+import EditCategory from '../EditCategory'
 import { Alert, Card, Spinner } from '../../shared'
 import useWidth from '../../../utils/useWidth'
 
