@@ -49,7 +49,9 @@ const EditAccount = ({ data, open }) => {
             <div className="mt-8 flex justify-center">
                <Button isLoading={isSubmitting} >Done</Button>
             </div>
-            <Alert data={alert} />
+            <div className="h-8 text-center">
+               <Alert data={alert} variant={'no-bg'} />
+            </div>
 
             {/* Delete account */}
             <div className="mt-16 flex flex-col items-center">

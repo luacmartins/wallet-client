@@ -21,7 +21,7 @@ const AccountsList = ({ data }) => {
       const initialState = Object.keys(data).length > 0 && data[Object.keys(data)[0]][0] || ''
       setAccount(initialState)
       setActive(initialState)
-   }, [data])
+   }, [])
 
    const handleClick = (accountData, isMobile) => {
       setActive(accountData)
@@ -29,7 +29,7 @@ const AccountsList = ({ data }) => {
       if (isMobile) openModal()
    }
 
-   const handleDelete = (account) => {
+   const handleDelete = (active) => {
       closeOverlay()
       close()
       deleteAccount(active)
