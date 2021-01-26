@@ -24,7 +24,6 @@ const EditAccount = ({ data, open }) => {
 
    return (
       <>
-         <Alert data={alert} />
          {/* Account header info */}
          <div className="flex flex-col items-center">
             <span className="text-lg text-center">{data.nickname}</span>
@@ -50,6 +49,7 @@ const EditAccount = ({ data, open }) => {
             <div className="mt-8 flex justify-center">
                <Button isLoading={isSubmitting} >Done</Button>
             </div>
+            <Alert data={alert} />
 
             {/* Delete account */}
             <div className="mt-16 flex flex-col items-center">

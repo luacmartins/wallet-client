@@ -1,5 +1,4 @@
-import AddCategory from './AddCategory'
-import Categories from './Categories'
-import EditCategory from './EditCategory'
-
-export { AddCategory, Categories, EditCategory }
+export { default as AddCategory } from './AddCategory';
+export { default as Categories } from './Categories';
+export { default as DeleteCategory } from './DeleteCategory';
+export { default as EditCategory } from './EditCategory';
