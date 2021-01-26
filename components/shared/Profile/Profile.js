@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import SettingList from '../SettingList'
 import ChangePassword from '../../forms/ChangePassword'
-import { Categories } from '../../categories'
+import Categories from '../../categories/Categories'
 
 const links = [
    { name: 'Change password', step: 'Password' },
