@@ -9,11 +9,11 @@ const links = [
 
 const Dropdown = () => {
    const { username, logout } = useAuth()
-   const { isVisible, open, close } = useOverlay()
+   const { isVisible, openOverlay, closeOverlay } = useOverlay()
 
    return (
       <>
-         <div onMouseEnter={open} onMouseLeave={close} className="relative">
+         <div onMouseEnter={openOverlay} onMouseLeave={closeOverlay} className="relative">
             <div className={`${isVisible && 'text-theme-gray-900'} flex items-center py-5 pl-6 cursor-pointer`}>
                <span>{username}</span>
                {isVisible ?

@@ -19,12 +19,16 @@ export default function useOverlay() {
       setIsVisible(false)
    }
 
+   const openOverlay = () => {
+      setIsVisible(true)
+   }
+
    const toggle = () => {
       setIsVisible(!isVisible)
       isMobile && document.getElementsByTagName('body')[0].classList.toggle('overflow-hidden')
    }
 
-   return { isVisible, close, closeOverlay, open, toggle }
+   return { isVisible, close, closeOverlay, openOverlay, open, toggle }
 }
 
 export const useClickOutside = (ref, dropdown) => {
