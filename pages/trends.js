@@ -43,8 +43,8 @@ export default function TrendsPage() {
         <NavBar />
         <MobileHeader title={'Trends'} />
 
-        {error || (isLoading && !tempData) || hasNoData ? (
-          <Suspense error={error} isLoading={isLoading && !tempData} />
+        {error || !tempData || hasNoData ? (
+          <Suspense error={error} isLoading={!tempData} />
         ) : (
           <main className='flex flex-col flex-1 mt-4 mb-12 md:mt-12'>
             <div className='md:flex md:justify-center'>

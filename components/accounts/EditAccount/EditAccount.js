@@ -90,7 +90,7 @@ const EditAccount = ({ data, open }) => {
         </div>
 
         {/* Delete account */}
-        <div className='flex flex-col items-center mt-6'>
+        <div className='flex flex-col items-center mt-6 mb-12'>
           <button
             type={'button'}
             onClick={open}

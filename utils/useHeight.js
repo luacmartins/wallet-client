@@ -1,22 +1,25 @@
 import { useState, useEffect } from 'react'
 
-const useHeight = (offset) => {
-   const [height, setHeight] = useState(0)
-   useEffect(() => {
-      const getHeight = () => {
-         let $height = window.innerHeight
-         if ($height < 900) setHeight($height - offset)
-         else setHeight(600)
-      }
-      getHeight()
-      window.addEventListener('resize', getHeight)
+const useHeight = offset => {
+  const [height, setHeight] = useState(0)
 
-      return () => {
-         window.removeEventListener('resize', getHeight)
-      }
-   }, [])
+  useEffect(() => {
+    const $width = window.innerWidth
 
-   return height
+    const getHeight = () => {
+      let $height = window.innerHeight
+      if ($height < 900) setHeight($height - offset)
+      else setHeight(600)
+    }
+    getHeight()
+    if ($width >= 768) window.addEventListener('resize', getHeight)
+
+    return () => {
+      if ($width >= 768) window.removeEventListener('resize', getHeight)
+    }
+  }, [])
+
+  return height
 }
 
 export default useHeight

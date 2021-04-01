@@ -23,7 +23,7 @@ const DateGroup = ({ value, setValue }) => {
     <>
       <header className='mb-2 text-sm'>Date</header>
       <div className='flex items-center h-16 bg-white border divide-x rounded-lg divide-theme-gray-600 border-theme-gray-600'>
-        <div className='flex flex-col justify-center w-1/2 px-3 h-ful'>
+        <div className='flex flex-col justify-center w-1/2 h-full px-3'>
           <label className='w-full text-sm text-theme-gray-700' htmlFor='from'>
             From
           </label>
