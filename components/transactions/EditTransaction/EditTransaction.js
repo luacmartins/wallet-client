@@ -41,17 +41,19 @@ const EditTransaction = ({ data, categories, submit }) => {
           onSubmit={handleSubmit(form => submit(data._id, form))}
           className='flex flex-col w-full mt-8 md:gap-y-2 md:mt-0 md:grid md:grid-cols-5 md:grid-rows-2 lg:grid-cols-4 md:gap-4 '
         >
-          <Input
-            type={'date'}
-            name={'date'}
-            label={'Date'}
-            defaultValue={data.date.user}
-            variant={variant}
-            error={errors}
-            register={register()}
-            className={theme}
-          />
-          <div className='col-span-3 my-2 lg:col-span-3'>
+          <div className='md:col-span-2 lg:col-span-1'>
+            <Input
+              type={'date'}
+              name={'date'}
+              label={'Date'}
+              defaultValue={data.date.user}
+              variant={variant}
+              error={errors}
+              register={register()}
+              className={theme}
+            />
+          </div>
+          <div className='col-span-3 my-2 md:my-0 lg:col-span-3'>
             <Input
               type={'text'}
               name={'description'}
@@ -63,17 +65,19 @@ const EditTransaction = ({ data, categories, submit }) => {
               className={theme}
             />
           </div>
-          <Amount
-            type={'input'}
-            name={'amount'}
-            label={'Amount'}
-            variant={variant}
-            defaultValue={data.amount}
-            error={errors}
-            control={control}
-            className={`hidden md:flex ${theme}`}
-          />
-          <div className='col-span-3 lg:col-span-2'>
+          <div className='md:col-span-2 lg:col-span-1'>
+            <Amount
+              type={'input'}
+              name={'amount'}
+              label={'Amount'}
+              variant={variant}
+              defaultValue={data.amount}
+              error={errors}
+              control={control}
+              className={`hidden md:flex ${theme}`}
+            />
+          </div>
+          <div className='col-span-3 md:col-span-3 lg:col-span-2'>
             <Select
               name={'category'}
               label={'Category'}
