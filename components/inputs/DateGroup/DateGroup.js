@@ -28,7 +28,7 @@ const DateGroup = ({ value, setValue }) => {
             From
           </label>
           <input
-            className='h-12 appearance-none'
+            className='w-full h-8 bg-transparent rounded appearance-none'
             value={value['startDate'] || ''}
             onChange={handleStartDateChange}
             name='startDate'
@@ -40,7 +40,7 @@ const DateGroup = ({ value, setValue }) => {
             To
           </label>
           <input
-            className='h-12 appearance-none'
+            className='w-full h-8 bg-transparent rounded appearance-none'
             value={value['endDate'] || ''}
             onChange={handleEndDateChange}
             name='endDate'
