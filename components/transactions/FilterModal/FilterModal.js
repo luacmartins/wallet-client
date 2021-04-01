@@ -4,23 +4,19 @@ import Modal from '../../shared/Modal'
 import FiltersList from '../FiltersList'
 import useOverlay from '../../../utils/useOverlay'
 
-const FilterModal = ({ value, setValue }) => {
-   const { isVisible, open, close } = useOverlay()
+const FilterModal = ({ list, value, setValue }) => {
+  const { isVisible, open, close } = useOverlay()
 
-   return (
-      <>
-         <FilterIcon onClick={open} />
-         <Modal
-            isVisible={isVisible}
-            close={close}
-            title={'Filters'}
-         >
-            <div className="mx-4 mt-4 mb-12">
-               <FiltersList value={value} setValue={setValue} />
-            </div>
-         </Modal>
-      </>
-   );
+  return (
+    <>
+      <FilterIcon onClick={open} />
+      <Modal isVisible={isVisible} close={close} title={'Filters'}>
+        <div className='mx-4 mt-4 mb-12'>
+          <FiltersList list={list} value={value} setValue={setValue} />
+        </div>
+      </Modal>
+    </>
+  )
 }
 
-export default FilterModal;
+export default FilterModal
