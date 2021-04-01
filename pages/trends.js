@@ -49,7 +49,7 @@ export default function TrendsPage() {
               <div className='md:w-80 lg:w-112 xl:w-128 lg:mb-4'>
                 <div
                   style={{ height }}
-                  className='w-screen max-h-90 md:w-full md:chart-h-80 lg:chart-h-96 xl:chart-h-112'
+                  className='w-screen max-h-90 md:max-h-full md:w-full md:chart-h-80 lg:chart-h-96 xl:chart-h-112'
                 >
                   <MonthlySpend colors={colors} data={data.monthly.series} period={monthlyPeriod} />
                 </div>
