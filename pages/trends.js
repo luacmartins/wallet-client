@@ -75,7 +75,7 @@ export default function TrendsPage() {
             <div className='md:mt-16'>
               <header className='mx-6 mb-6 text-xl md:hidden'>Overtime spending</header>
               <header className='justify-center hidden mx-6 mb-12 md:flex md:text-2xl xl:text-3xl'>
-                ...and here is your spending overtime
+                ...and here is your spending over time
               </header>
               <OvertimeIntro data={tempData.overtime.summary} />
               <div style={{ height: overtimeHeight }} className='w-screen md:h-80'>
